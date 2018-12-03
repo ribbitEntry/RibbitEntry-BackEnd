@@ -1,7 +1,7 @@
 class Config(object):
 
     SWAGGER = {
-        'title': 'RibbitEntry-BackEnd',
+        'title': 'RibbitEntry',
         'specs_route': '/api/docs',
         'uiversion': 3,
 
@@ -21,7 +21,7 @@ class Config(object):
         'tags': [
             {
                 'name': 'login',
-                'description': '로그인/회원가'
+                'description': '로그인/회원가입'
             },
             {
                 'name': 'my-page',
@@ -34,6 +34,10 @@ class Config(object):
             {
                 'name': 'user',
                 'description': '유저'
+            },
+            {
+                'name': 'search',
+                'description': '검색'
             }
         ]
     }
