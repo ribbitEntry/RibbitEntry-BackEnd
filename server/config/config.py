@@ -10,7 +10,7 @@ class Config(object):
             'version': '0.1',
             'description': 'Ribbit 프로젝트의 백엔드 API 명세서입니다.'
         },
-        'host': '52.78.227.70:5000',
+        'host': 'aws.jaehoon.kim:5000',
         'basePath': '/api/',
     }
 
