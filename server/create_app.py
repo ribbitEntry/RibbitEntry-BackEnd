@@ -15,4 +15,7 @@ def create_app():
     from view.login import Login
     api.add_resource(Login, '/api/login')
 
+    from view.web import Web
+    api.add_resource(Web, '/server-status')
+
     return app

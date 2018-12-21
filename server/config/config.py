@@ -28,13 +28,14 @@ class Config(object):
                 'description': '마이페이지 정보'
             },
             {
+                'name': 'follow',
+                'description': '팔로잉/팔로워 관리'
+            },
+            {
                 'name': 'posts',
                 'description': '게시글'
             },
-            {
-                'name': 'user',
-                'description': '유저'
-            },
+
             {
                 'name': 'search',
                 'description': '검색'
