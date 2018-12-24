@@ -39,6 +39,11 @@ class Config(object):
             {
                 'name': 'search',
                 'description': '검색'
+            },
+
+            {
+                'name': 'main_page',
+                'description': '메인화면'
             }
         ]
     }
