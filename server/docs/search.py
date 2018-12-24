@@ -1,6 +1,6 @@
 from . import param
 
-POST_POST = {
+SEARCH_POST = {
     'tags': ['search'],
     'parameters': [
         param('search_word', "검색어"),
@@ -15,7 +15,7 @@ POST_POST = {
     }
 }
 
-POST_GET = {
+SEARCH_GET = {
     'tags': ['search'],
     'parameters': [
         param('search_word', "검색어"),
