@@ -7,7 +7,7 @@ LOGIN_POST = {
         param('password', "비밀번호")
     ],
     'responses': {
-        '201': {
+        '200': {
             'description': "JWT 반환 성공",
             "example": {
                 "access_token": "dkAhffkDkanxmsJWTzhemdla",
