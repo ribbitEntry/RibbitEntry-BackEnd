@@ -19,7 +19,7 @@ MY_PAGE_POST = {
             'description': "마이페이지 정보 수정 성공",
         },
         '403': {
-            'description': "JWT 인증 실"
+            'description': "JWT 인증 실패"
         }
     }
 }
