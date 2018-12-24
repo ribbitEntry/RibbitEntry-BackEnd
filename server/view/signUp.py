@@ -1,4 +1,3 @@
-from database
 from flask import request
 from flasgger import swag_from
 from flask_restful import Resource
@@ -17,4 +16,4 @@ class SignUp(Resource):
         nickname = payload['nickname']
 
         if email and password and nickname:
-
+            pass
