@@ -2,7 +2,7 @@ from flask import request
 from flasgger import swag_from
 from flask_restful import Resource
 
-from extensions import db
+from server.extensions import db
 from server.docs.login import SIGNUP_POST
 from server.model.user import User
 
