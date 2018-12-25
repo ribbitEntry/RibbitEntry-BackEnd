@@ -1,3 +1,6 @@
+import os
+from datetime import timedelta
+
 class Config(object):
 
     SWAGGER = {
@@ -49,3 +52,13 @@ class Config(object):
     }
 
     JSON_AS_ASCII = False
+
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1224@ribbit.jaehoon.kim/ribbit-entry'
+    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+    # 상용운전시 환경변수 필히 설정할 것!!
+    SECRET_KEY = os.getenv('SECRET_KEY', 'NEEDFORSPEED')
+
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)

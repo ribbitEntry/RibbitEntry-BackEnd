@@ -1,9 +1,11 @@
 from sqlalchemy import Column
-from . import db
+
+from server.extensions import db
 
 
 class User(db.Model):
     __tablename__ = 'user'
+    __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     id = Column(db.String(50), primary_key=True)
     pw = Column(db.String(50), nullable=False)
