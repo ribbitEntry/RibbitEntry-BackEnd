@@ -3,7 +3,8 @@ from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flasgger import Swagger
 
+db = SQLAlchemy()
 cors = CORS()
 jwt = JWTManager()
 swagger = Swagger()
-db = SQLAlchemy()
+

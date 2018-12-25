@@ -22,7 +22,7 @@ class SignUp(Resource):
                 return {"status": "The ID already exists."}, 409
 
             else:
-                user = User(id=email, password=password, nickname=nickname)
+                user = User(id=email, pw=password, nickname=nickname)
                 db.session.add(user)
                 db.session.commit()
                 return {"status": "sign-up has been succeeded"}

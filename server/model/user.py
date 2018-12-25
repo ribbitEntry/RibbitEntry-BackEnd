@@ -11,8 +11,8 @@ class User(db.Model):
     pw = Column(db.String(50), nullable=False)
     nickname = Column(db.String(50), nullable=False)
 
-    proimg = Column(db.String, default='')
-    backimg = Column(db.String, default='')
+    proimg = Column(db.String(30), default='')
+    backimg = Column(db.String(30), default='')
     introduction = Column(db.String(100), default='소개를 작성해주세요.')
 
     follow_num = Column(db.String(10), default=0)
