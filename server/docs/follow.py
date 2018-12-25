@@ -1,23 +1,74 @@
 from . import param
 
-FOLLOW_POST = {
+FOLLOW_GET = {
     'tags': ['follow'],
     'parameters': [
-        param('email', "팔로우 "),
-        param('password', "비밀번호")
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        }
     ],
     'responses': {
         '201': {
-            'description': "JWT 반환 성공",
-            "example": {
-                "access_token": "dkAhffkDkanxmsJWTzhemdla",
-                "refresh_token": "flvmfptlxhzms"
+            'description': "팔로우 정보 반환 성공",
+            'example': {
+                'now_following': [
+                    '김재훈', '김준우', '신은주', '이채은'
+                ],
+                'now_follower': [
+                    '김재훈', '김준우', '신은주', '이채은'
+                ]
             }
         },
-        '401': {
-            'description': "없는 ID이거나 비밀번호가 틀렸습니다."
+        '403': {
+            'description': "JWT 인증 실패"
         }
     }
 }
 
-FOLLOW_DELETE = {}
+FOLLOW_POST = {
+    'tags': ['follow'],
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
+        param('userId', '팔로우할 유저의 이메일(아이디)')
+    ],
+    'responses': {
+        '201': {
+            'description': "팔로우 성공",
+        },
+        '403': {
+            'description': "JWT 인증 실패"
+        }
+    }
+}
+
+FOLLOW_DELETE = {
+    'tags': ['follow'],
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
+        param('userId', '팔로우 취소할 유저의 이메일(아이디)')
+    ],
+    'responses': {
+        '201': {
+            'description': "팔로우 취소 성공",
+        },
+        '403': {
+            'description': "JWT 인증 실패"
+        }
+    }
+}

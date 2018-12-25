@@ -12,16 +12,16 @@ class Router():
         self.api = Api(app)
 
     def register(self):
-        from view.user.login import Login
+        from view.user.login.login import Login
         self.api.add_resource(Login, '/api/login')
 
         from view.user.login.signUp import SignUp
         self.api.add_resource(SignUp, '/api/sign-up')
 
-        from view.web import Web
+        from view.web.web import Web
         self.api.add_resource(Web, '/server-status')
 
-        from view.search import Search
+        from view.search.search import Search
         self.api.add_resource(Search, '/api/search')
 
         from view.posts.post import Post
@@ -32,3 +32,6 @@ class Router():
 
         from view.user.myPage.MyPage import MyPage
         self.api.add_resource(MyPage, '/api/my-page')
+
+        from view.follow.following import Follow
+        self.api.add_resource(Follow, '/api/follow')

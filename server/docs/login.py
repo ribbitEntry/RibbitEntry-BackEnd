@@ -11,7 +11,8 @@ LOGIN_POST = {
             'description': "JWT 반환 성공",
             "example": {
                 "access_token": "dkAhffkDkanxmsJWTzhemdla",
-                "refresh_token": "flvmfptlxhzms"
+                "refresh_token": "flvmfptlxhzms",
+                "color_set": "yellow"
             }
         },
         '401': {

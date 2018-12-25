@@ -1,7 +1,7 @@
 from . import param
 
 POST_POST = {
-    'tags': ['post'],
+    'tags': ['posts'],
     'parameters': [
         param('title', "제목"),
         param('content', "내용"),
@@ -18,7 +18,7 @@ POST_POST = {
 }
 
 POST_DELETE = {
-    'tags': ['post'],
+    'tags': ['posts'],
     'parameters': [
         param('post_id', "제목")
     ],
