@@ -12,26 +12,26 @@ class Router():
         self.api = Api(app)
 
     def register(self):
-        from view.user.login.login import Login
+        from server.view.user.login.login import Login
         self.api.add_resource(Login, '/api/login')
 
-        from view.user.login.signUp import SignUp
+        from server.view.user.login.signUp import SignUp
         self.api.add_resource(SignUp, '/api/sign-up')
 
-        from view.web.web import Web
+        from server.view.web.web import Web
         self.api.add_resource(Web, '/server-status')
 
-        from view.search.search import Search
+        from server.view.search.search import Search
         self.api.add_resource(Search, '/api/search')
 
-        from view.posts.post import Post
+        from server.view.posts.post import Post
         self.api.add_resource(Post, '/api/posts')
 
-        from view.mainPage.MainPage import MainPage
+        from server.view.mainPage.MainPage import MainPage
         self.api.add_resource(MainPage, '/api/main-page')
 
-        from view.user.myPage.MyPage import MyPage
+        from server.view.user.myPage.MyPage import MyPage
         self.api.add_resource(MyPage, '/api/my-page')
 
-        from view.follow.following import Follow
+        from server.view.follow.following import Follow
         self.api.add_resource(Follow, '/api/follow')
