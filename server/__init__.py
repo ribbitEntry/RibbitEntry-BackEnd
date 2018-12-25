@@ -14,11 +14,11 @@ def register_extensions(app: Flask):
 
 
 def utility(app: Flask):
-    from view import Router
+    from server.view import Router
 
     Router(app).register()
 
-    from config.config import Config
+    from server.config.config import Config
 
     app.config.from_object(Config)
 
