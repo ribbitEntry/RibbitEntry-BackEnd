@@ -25,4 +25,4 @@ class SignUp(Resource):
                 user = User(id=email, pw=password, nickname=nickname)
                 db.session.add(user)
                 db.session.commit()
-                return {"status": "sign-up has been succeeded"}
+                return {"status": "sign-up has been succeeded"}, 201
