@@ -21,6 +21,6 @@ class Login(Resource):
                 return {
                     'access_token': create_access_token(),
                     'refresh_token': create_refresh_token(),
-                    'color_set'
+                    'color_set': 'processing'
                 }
 
