@@ -12,7 +12,7 @@ class SignUp(Resource):
     @swag_from(SIGNUP_POST)
     def post(self):
         payload = request.json
-        email = payload['email']
+        email = payload['userId']
         password = payload['password']
         nickname = payload['nickname']
 

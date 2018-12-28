@@ -3,7 +3,7 @@ from . import param
 LOGIN_POST = {
     'tags': ['login'],
     'parameters': [
-        param('email', "이메일"),
+        param('userId', "이메일"),
         param('password', "비밀번호")
     ],
     'responses': {
@@ -24,7 +24,7 @@ LOGIN_POST = {
 SIGNUP_POST = {
     'tags': ['login'],
     'parameters': [
-        param('email', '이메일'),
+        param('userId', '이메일'),
         param('password', '비밀번호'),
         param('nickname', '닉네임')
     ],
