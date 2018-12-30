@@ -14,6 +14,8 @@ class MyPage(Resource):
     @swag_from(MY_PAGE_GET)
     @jwt_required
     def get(self):
+        pass
+        """
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
         post_info = Post.query.filter(user=user_id).all()
@@ -41,3 +43,4 @@ class MyPage(Resource):
             }
         else:
             pass
+        """
