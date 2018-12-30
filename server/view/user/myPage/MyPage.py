@@ -37,7 +37,7 @@ class MyPage(Resource):
                         "title": comment.title,
                         "content": comment.content,
                         "date": comment.date} for comment in comment_info]
-                    } for post in post_info]
-                }
-            else:
-            return
+                } for post in post_info]
+            }
+        else:
+            pass
