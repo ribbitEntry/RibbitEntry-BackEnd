@@ -17,4 +17,4 @@ class Post(db.Model):
     image = Column(db.String)
 
     like = Column(db.Integer, default=0)
-    comment = Column(db.Integer, ForeignKey("comment.comment_id"), default=None)
+    comment = Column(db.Integer, ForeignKey("comment.comment_id"))
