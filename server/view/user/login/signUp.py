@@ -17,9 +17,9 @@ class SignUp(Resource):
         password = payload['password']
         nickname = payload['nickname']
 
-        if email and password and nickname:
+        if email and password and nickname and validate_email(email):
 
-            if validate_email(email) and User.query.filter(User.id == email).first():
+            if User.query.filter(User.id == email).first():
                 return {"status": "The ID already exists."}, 409
 
             else:
@@ -27,3 +27,6 @@ class SignUp(Resource):
                 db.session.add(user)
                 db.session.commit()
                 return {"status": "sign-up has been succeeded"}, 201
+
+        else:
+            return {"status": "Not enough factors."}, 400
