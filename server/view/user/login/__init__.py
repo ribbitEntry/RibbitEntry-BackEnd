@@ -11,6 +11,7 @@ def validate_email(email):
         auth=("api", os.getenv('EMAIL_VALIDATE_KEY')),
         params={"address": str(email)}
     ).json()
+    print(os.getenv('EMAIL_VALIDATE_KEY'))
     print(responsed)
     print(dict(responsed)['is_valid'])
     return dict(responsed)['is_valid']
