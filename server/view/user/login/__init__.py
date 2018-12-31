@@ -4,7 +4,7 @@ import requests
 
 def validate_email(email):
     responsed = requests.request(method="GET",
-                                 url=str(os.getenv('EMAIL_VALIDATE_URL')),
+                                 url="https://api.mailgun.net/v3/address/validate",
                                  auth=("api", str(os.getenv('EMAIL_VALIDATE_KEY'))),
                                  params={"address": str(email)}
                                  ).json()
