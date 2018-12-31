@@ -25,8 +25,8 @@ class Login(Resource):
                         'color_set': 'processing'
                     }, 200
                 else:
-                    return Response("없는 계정이거나 잘못된 비밀번호")
+                    return {"status": "Account is missing or incorrect password"}, 401
             else:
-                return Response("유효하지 않은 이메일"), 405
+                return {"status": "The E-mail address is not valid."}, 400
         else:
-            return {"status": "incorrectly authentication info"}, 401
+            return {"status": "Not enough factors."}, 400
