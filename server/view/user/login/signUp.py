@@ -5,7 +5,7 @@ from flask_restful import Resource
 from server.extensions import db
 from server.docs.login import SIGNUP_POST
 from server.model.user import User
-from server.view.user.login import validate_email
+# from server.view.user.login import validate_email
 
 
 class SignUp(Resource):
@@ -16,8 +16,7 @@ class SignUp(Resource):
         email = payload['userId']
         password = payload['password']
         nickname = payload['nickname']
-
-        if email and password and nickname and validate_email(email):
+        if email and password and nickname:
 
             if User.query.filter(User.id == email).first():
                 return {"status": "The ID already exists."}, 409
