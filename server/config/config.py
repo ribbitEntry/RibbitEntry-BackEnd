@@ -51,8 +51,6 @@ class Config(object):
         ]
     }
 
-    JSON_AS_ASCII = False
-
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1224@ribbit.jaehoon.kim/ribbit-entry'
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True

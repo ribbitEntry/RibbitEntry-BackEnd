@@ -1,12 +1,18 @@
+import os
+import json
 import requests
 
-from os import getenv
+from flask import jsonify
 
 
 def validate_email(email):
-    responsed = requests.get(
-        getenv('EMAIL_VALIDATE_URL'),
-        auth=("api", getenv('EMAIL_VALIDATE_KEY')),
-        params={"address": str(email)}
+    print(type(email))
+    print("a", os.getenv('EMAIL_VALIDATE_KEY'))
+    response = requests.request(
+        method="GET",
+        url="https://api.mailgun.net/v3/address/validate",
+        auth=("api", os.getenv('EMAIL_VALIDATE_KEY')),
+        params={"address": email}
     ).json()
-    return dict(responsed)['is_valid']
+    print(response)
+    return response['is_valid']

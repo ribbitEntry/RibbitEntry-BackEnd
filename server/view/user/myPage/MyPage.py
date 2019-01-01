@@ -4,9 +4,6 @@ from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from server.docs.myPage import MY_PAGE_GET
-from server.model.user import User
-from server.model.post import Post
-from server.model.comment import Comment
 
 
 class MyPage(Resource):
