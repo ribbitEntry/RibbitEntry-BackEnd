@@ -14,7 +14,7 @@ class Post(db.Model):
 
     title = Column(db.String(50), nullable=False)
     content = Column(db.String(100), nullable=False)
-    image = Column(db.String)
+    image = Column(db.String(100))
 
     like = Column(db.Integer, default=0)
-    comment = Column(db.Integer, ForeignKey("comment.comment_id"), nullable=False, default=None)
+    comment = Column(db.Integer, ForeignKey("comment.comment_id"), default=None)
