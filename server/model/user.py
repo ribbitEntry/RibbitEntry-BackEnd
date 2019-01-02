@@ -11,7 +11,7 @@ class User(db.Model):
     pw = Column(db.String(50), nullable=False)
     nickname = Column(db.String(50), nullable=False)
 
-    theme_color = Column(db.String(20), default='')
+    theme_color = Column(db.String(20), default='#F58EA8')
     proimg = Column(db.String(100), default='')
     backimg = Column(db.String(100), default='')
     introduction = Column(db.String(100), default='소개를 작성해주세요.')
