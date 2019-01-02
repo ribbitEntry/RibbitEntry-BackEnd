@@ -23,7 +23,10 @@ class Posts(Resource):
             db.session.commit()
             return {'status': '글 작성 완료'}, 201
         else:
-            return {'status': '제목과 글 모두 작성해주세요'}, 400
+            return '제목과 글 모두 작성해주세요', 400
+
+        
+
 
     @swag_from(POST_DELETE)
     def delete(self):
