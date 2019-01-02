@@ -11,7 +11,7 @@ class Search(Resource):
     @swag_from(SEARCH_POST)
     def post(self):
         search_word = request.json['search_word']
-        user_info = User.query.filter(search_word == User.nickname)
+        user_info = User.query.filter(User.nickname == search_word).first()
 
         if user_info:
             return {
