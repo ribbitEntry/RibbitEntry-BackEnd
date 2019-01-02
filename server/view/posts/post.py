@@ -25,9 +25,6 @@ class Posts(Resource):
         else:
             return '제목과 글 모두 작성해주세요', 400
 
-        
-
-
     @swag_from(POST_DELETE)
     def delete(self):
         post_id = request.json['post_id']
