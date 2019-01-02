@@ -27,10 +27,6 @@ class MyPage(Resource):
             "follower_num": user_info.follower_num
         }
 
-        print(user_info)
-        print(post_info)
-        print(user_info_.encode('utf-8'))
-
         if not user_info:
             return {"status": "invalid authentication"}, 401
 
