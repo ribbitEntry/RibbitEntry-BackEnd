@@ -17,13 +17,16 @@ class Posts(Resource):
         content = request.json['content']
         image = request.json['image']
 
-        if not title and content:
-            return '제목과 글 모두 작성해주세요', 400
-        else:
+        if title and content:
             post = Post(title=title, content=content, image=image, user=get_jwt_identity())
             db.session.add(post)
             db.session.commit()
             return '글 작성 완료', 201
+        else:
+            return '제목과 글 모두 작성해주세요', 400
+
+        
+
 
     @swag_from(POST_DELETE)
     def delete(self):
