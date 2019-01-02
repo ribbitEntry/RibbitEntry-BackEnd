@@ -16,5 +16,5 @@ class User(db.Model):
     backimg = Column(db.String(100), default='')
     introduction = Column(db.String(100), default='소개를 작성해주세요.')
 
-    follow_num = Column(db.String(10), default=0)
-    follower_num = Column(db.String(10), default=0)
+    follow_num = Column(db.Integer, default=0)
+    follower_num = Column(db.Integer, default=0)

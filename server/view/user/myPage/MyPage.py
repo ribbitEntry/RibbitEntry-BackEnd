@@ -35,29 +35,22 @@ class MyPage(Resource):
             return unicode_safe_json_dumps({"user_info": user_info_})
 
         elif user_info and post_info:
-            print(type(post_info))
+            print(post_info)
             for i in post_info:
-                print(i.content)
+                print(i)
             return unicode_safe_json_dumps({
-                       "user_info": user_info_,
-                       "post": [
-                           {
-                               "title": posts.title,
-                               "content": posts.content,
-                               "image": posts.image,
-                               "user": posts.user,
-                               "date": posts.date,
-                               "like": posts.like,
-                               "comment": [
-                                   {
-                                       "comment_id": Comment.query.filter(comment_id=comment).first().comment_id,
-                                       "user": Comment.query.filter(comment_id=comment).first().user,
-                                       "title": Comment.query.filter(comment_id=comment).first().title,
-                                       "content": Comment.query.filter(comment_id=comment).first().content,
-                                       "date": Comment.query.filter(comment_id=comment).first().date
-                                   } for comment in posts.comment if type(posts.comment) == list]
-                           } for posts in post_info]
-                   })
+                "user_info": user_info_,
+                "post": [
+                    {
+                        "title": posts.title,
+                        "content": posts.content,
+                        "image": posts.image,
+                        "user": posts.user,
+                        "date": str(posts.date),
+                        "like": posts.like,
+                        "comment": ["empty_comment"]
+                    } for posts in post_info]
+            })
 
     @swag_from(MY_PAGE_POST)
     def post(self):
