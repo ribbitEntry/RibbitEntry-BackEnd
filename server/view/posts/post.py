@@ -6,6 +6,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from server.docs.posts import POST_POST, POST_DELETE
 from server.extensions import db
 from server.model.post import Post
+from server.view import unicode_safe_json_dumps
 
 
 class Posts(Resource):
@@ -21,9 +22,9 @@ class Posts(Resource):
             post = Post(title=title, content=content, image=image, user=get_jwt_identity())
             db.session.add(post)
             db.session.commit()
-            return {'status': '글 작성 완료'}, 201
+            return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
         else:
-            return {'status': '제목과 글 모두 작성해주세요'}, 400
+            return unicode_safe_json_dumps({'status': '제목과 글 모두 작성해주세요'}, 400)
 
     @swag_from(POST_DELETE)
     def delete(self):
