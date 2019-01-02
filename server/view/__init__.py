@@ -35,3 +35,6 @@ class Router():
 
         from server.view.follow.following import Follow
         self.api.add_resource(Follow, '/api/follow')
+
+
+def unicode_safe_json_dumps(data, )
