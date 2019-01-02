@@ -27,10 +27,16 @@ MY_PAGE_POST = {
 MY_PAGE_GET = {
     'tags': ['my-page'],
     'parameters': [
-            param('id', "user_id"),
-        ],
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        }
+    ],
     'responses': {
-        '201': {
+        '200': {
             'description': "마이페이지를 불러왔습니다.",
             "example": {
                 "nickname": "ribbit",
@@ -40,17 +46,17 @@ MY_PAGE_GET = {
                 "follow_num": "0",
                 "follower_num": "0",
                 "post": {
+                    "title": "서버",
+                    "content": "리빗엔트리",
+                    "image": "link",
+                    "user": "kim",
+                    "date": "00:00:00",
+                    "like": "50",
+                    "comment": {
                         "title": "서버",
                         "content": "리빗엔트리",
-                        "image": "link",
-                        "user": "kim",
-                        "date": "00:00:00",
-                        "like": "50",
-                        "comment": {
-                                    "title": "서버",
-                                    "content": "리빗엔트리",
-                                    "date": "00:00:00"
-                        }
+                        "date": "00:00:00"
+                    }
                 }
             }
         },

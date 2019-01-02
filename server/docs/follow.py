@@ -12,7 +12,7 @@ FOLLOW_GET = {
         }
     ],
     'responses': {
-        '201': {
+        '200': {
             'description': "팔로우 정보 반환 성공",
             'example': {
                 'now_following': [
@@ -64,7 +64,7 @@ FOLLOW_DELETE = {
         param('userId', '팔로우 취소할 유저의 이메일(아이디)')
     ],
     'responses': {
-        '201': {
+        '200': {
             'description': "팔로우 취소 성공",
         },
         '403': {
