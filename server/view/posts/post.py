@@ -14,21 +14,25 @@ class Posts(Resource):
     @swag_from(POST_POST)
     @jwt_required
     def post(self):
-        title = request.json['title']
         content = request.json['content']
-        image = request.json['image']
+        image = request.form['image']
 
-        if title and content:
-            post = Post(title=title, content=content, image=image, user=get_jwt_identity())
+        if content:
+            post = Post(content=content, image=image, user=get_jwt_identity())
             db.session.add(post)
             db.session.commit()
             return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
         else:
-            return unicode_safe_json_dumps({'status': '제목과 글 모두 작성해주세요'}, 400)
+            return unicode_safe_json_dumps({'status': '내용을 작성해주세요'}, 400)
 
     @swag_from(POST_DELETE)
+    @jwt_required
     def delete(self):
         post_id = request.json['post_id']
 
-        db.session.delete(post_id)
-        db.session.commit()
+        if Post.query.filter(Post.post_id == post_id):
+            Post.query.filter(Post.post_id == post_id).delete()
+            db.session.commit()
+            return unicode_safe_json_dumps({'status': '글이 삭제되었습니다.'}, 200)
+        else:
+            unicode_safe_json_dumps({'status': '없는 글입니다.'}, 400)
