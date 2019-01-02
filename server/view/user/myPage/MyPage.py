@@ -16,7 +16,7 @@ class MyPage(Resource):
     def get(self):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
-        post_info = Post.query.filter(user=user_id).all()
+        post_info = Post.query.filter(Post.user == user_id).all()
 
         user_info_ = {
             "nickname": user_info.nickname,
