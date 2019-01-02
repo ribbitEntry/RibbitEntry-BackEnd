@@ -3,6 +3,13 @@ from . import param
 POST_POST = {
     'tags': ['posts'],
     'parameters': [
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
         param('title', "제목"),
         param('content', "내용"),
         param('image', "이미지")
@@ -20,6 +27,13 @@ POST_POST = {
 POST_DELETE = {
     'tags': ['posts'],
     'parameters': [
+        {
+            'name': 'Authorization',
+            'description': "헤더로 jwt 받아오기",
+            'in': 'header',
+            'type': 'str',
+            'required': True
+        },
         param('post_id', "제목")
     ],
     'responses': {

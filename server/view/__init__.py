@@ -1,5 +1,7 @@
+import json
+
 from sqlalchemy.orm import sessionmaker
-from flask import Flask
+from flask import Flask, Response
 from flask_restful import Api
 
 Session = sessionmaker()
@@ -37,4 +39,9 @@ class Router():
         self.api.add_resource(Follow, '/api/follow')
 
 
-def unicode_safe_json_dumps(data, )
+def unicode_safe_json_dumps(data, status_code=200):
+    return Response(
+        json.dumps(data, ensure_ascii=False),
+        status_code,
+        content_type='application/json; charset=utf8'
+    )

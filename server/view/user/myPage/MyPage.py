@@ -7,6 +7,7 @@ from server.docs.myPage import MY_PAGE_GET, MY_PAGE_POST
 from server.model.user import User
 from server.model.post import Post
 from server.model.comment import Comment
+from server.view import unicode_safe_json_dumps
 
 
 class MyPage(Resource):
@@ -31,10 +32,13 @@ class MyPage(Resource):
             return {"status": "invalid authentication"}, 401
 
         elif user_info and not post_info:
-            return {"user_info": user_info_}, 200
+            return unicode_safe_json_dumps({"user_info": user_info_})
 
         elif user_info and post_info:
-            return {
+            print(type(post_info))
+            for i in post_info:
+                print(i.content)
+            return unicode_safe_json_dumps({
                        "user_info": user_info_,
                        "post": [
                            {
@@ -51,9 +55,9 @@ class MyPage(Resource):
                                        "title": Comment.query.filter(comment_id=comment).first().title,
                                        "content": Comment.query.filter(comment_id=comment).first().content,
                                        "date": Comment.query.filter(comment_id=comment).first().date
-                                   } for comment in posts.comment]
+                                   } for comment in posts.comment if type(posts.comment) == list]
                            } for posts in post_info]
-                   }, 200
+                   })
 
     @swag_from(MY_PAGE_POST)
     def post(self):
