@@ -16,6 +16,7 @@ class MainPage(Resource):
         user_id = get_jwt_identity()
         user_info = User.quere.filter(User.id == user_id)
         post_info = User.quere.fiflter(Post.user == user_id)
+        # 나중에 쿼리문 수정해야합니당
 
         user_info_ = {
             "nickname": user_info.nickname,
