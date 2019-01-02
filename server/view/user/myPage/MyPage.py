@@ -1,5 +1,4 @@
 # from database import db_session
-from
 from flasgger import swag_from
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
