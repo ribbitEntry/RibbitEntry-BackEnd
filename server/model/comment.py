@@ -9,7 +9,7 @@ class Comment(db.Model):
     __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     comment_id = Column(db.Integer, primary_key=True, autoincrement=True)
-    user = Column(db.String, ForeignKey("user.id"))
+    user = Column(db.String(50), ForeignKey("user.id"))
     date = Column(db.DateTime, default=datetime.now)
 
     title = Column(db.String(50), nullable=False)
