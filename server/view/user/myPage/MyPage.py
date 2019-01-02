@@ -29,7 +29,7 @@ class MyPage(Resource):
 
         print(user_info)
         print(post_info)
-        print(user_info_)
+        print(user_info_.encode('utf-8'))
 
         if not user_info:
             return {"status": "invalid authentication"}, 401
