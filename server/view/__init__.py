@@ -41,7 +41,7 @@ class Router():
         self.api.add_resource(Following, '/api/follow')
 
         from server.view.user.myPage.images import GETImages
-        self.api.add_resource(GETImages, '/api/images/<postId>/<fileId>')
+        self.api.add_resource(GETImages, '/api/images')
 
         from server.view.color.color import Color
         self.api.add_resource(Color, '/api/color')
@@ -75,9 +75,9 @@ def upload_files(files, userId, postId):
             file_name = secure_filename(file.filename)
             file.save(os.path.join(directory, file_name))
 
-            file_id = str(postId) + '/' + file_name
+            file_id = '?postId=' + str(postId) + '&fileId=' + file_name
 
             from server.view.user.myPage.images import GETImages
-            url_list.append("http://ribbit.jaehoon.kim:5000/api/images/" + file_id)
+            url_list.append("http://ribbit.jaehoon.kim:5000/api/images" + file_id)
 
     return url_list
