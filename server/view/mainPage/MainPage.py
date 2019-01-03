@@ -5,7 +5,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.docs.mainpage import MAIN_PAGE_GET
 from server.model.post import Post
 from server.model.user import User
-from server.model.comment import Comment
+from server.model.follow import Follow
+from server.view import unicode_safe_json_dumps
 
 
 class MainPage(Resource):
@@ -14,9 +15,9 @@ class MainPage(Resource):
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
-        user_info = User.quere.filter(User.id == user_id)
-        post_info = User.quere.fiflter(Post.user == user_id)
-        # 나중에 쿼리문 수정해야합니당
+        user_info = User.quere.filter(User.id == user_id).first()
+        my_follow = Follow.quere.filter(Follow.follow == user_id).all()
+        post_info = my_follow(Post.user == Follow.follower).all()
 
         user_info_ = {
             "nickname": user_info.nickname,
@@ -30,7 +31,7 @@ class MainPage(Resource):
             return {"status": "없는 유저입니다."}, 401
 
         elif user_info and not post_info:
-            return {"user_info": user_info_}, 200
+            return unicode_safe_json_dumps({"user_info": user_info_}, 200)
 
         elif user_info and post_info:
             return {
@@ -43,13 +44,5 @@ class MainPage(Resource):
                                "user": posts.user,
                                "date": posts.date,
                                "like": posts.like,
-                               "comment": [
-                                   {
-                                       "comment_id": Comment.query.filter(comment_id=comment).first().comment_id,
-                                       "user": Comment.query.filter(comment_id=comment).first().user,
-                                       "title": Comment.query.filter(comment_id=comment).first().title,
-                                       "content": Comment.query.filter(comment_id=comment).first().content,
-                                       "date": Comment.query.filter(comment_id=comment).first().date
-                                   } for comment in posts.comment]
                            } for posts in post_info]
                    }, 200
