@@ -32,9 +32,6 @@ class Posts(Resource):
                 post = Post(content=content, user=userId, date=nowaday)
                 db.session.add(post)
                 db.session.commit()
-                print(nowaday)
-                print(post)
-                print(nowaday == post.date)
 
                 if files:
                     before_post = Post.query.filter(Post.user == userId, Post.date == nowaday, Post.content == content).first()
