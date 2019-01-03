@@ -1,12 +1,14 @@
 from flask_restful import Resource
 from flasgger import swag_from
 from flask import request
+from datetime import datetime
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from server.docs.posts import POST_POST, POST_DELETE
 from server.extensions import db
+from server.model.user import User
 from server.model.post import Post
-from server.view import unicode_safe_json_dumps
+from server.view import unicode_safe_json_dumps, upload_files
 
 
 class Posts(Resource):
@@ -14,16 +16,39 @@ class Posts(Resource):
     @swag_from(POST_POST)
     @jwt_required
     def post(self):
+        userId = get_jwt_identity()
         content = request.json['content']
-        image = request.form['image']
+        nowaday = datetime.now()
 
-        if content:
-            post = Post(content=content, image=image, user=get_jwt_identity())
-            db.session.add(post)
-            db.session.commit()
-            return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
+        # 파일 유무 확인
+        try:
+            files = request.files.getlist("file")
+        except:
+            files = None
+
+        if User.query.filter(User.id == userId).first():
+
+            if content:
+                post = Post(content=content, user=userId, date=nowaday)
+                db.session.add(post)
+                db.session.commit()
+
+                if files:
+                    before_post = Post.query.filter(Post.user == userId, Post.date == nowaday).first()
+                    postId = before_post.post_id
+
+                    # 파일 업로드 및 링크 리스트 반환
+                    urls = upload_files(files, userId, postId)
+                    before_post.image = urls
+                    db.session.commit()
+
+                return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
+
+            else:
+                return unicode_safe_json_dumps({'status': '내용을 작성해주세요'}, 400)
+
         else:
-            return unicode_safe_json_dumps({'status': '내용을 작성해주세요'}, 400)
+            return unicode_safe_json_dumps({'status': '일치하지 않는 인증 정보입니다.'}, 401)
 
     @swag_from(POST_DELETE)
     @jwt_required

@@ -1,8 +1,10 @@
+import os
 import json
 
-from sqlalchemy.orm import sessionmaker
-from flask import Flask, Response
+from flask import Flask, Response, current_app, url_for
 from flask_restful import Api
+from sqlalchemy.orm import sessionmaker
+from werkzeug.utils import secure_filename
 
 Session = sessionmaker()
 session = Session()
@@ -39,10 +41,7 @@ class Router():
         self.api.add_resource(Following, '/api/follow')
 
         from server.view.user.myPage.images import GETImages
-        self.api.add_resource(GETImages, '/api/images/<filename>')
-
-        from server.view.user.myPage.images import UploadImages
-        self.api.add_resource(UploadImages, '/api/upload-images/<postId>')
+        self.api.add_resource(GETImages, '/api/images/<postId>/<fileId>')
 
 
 def unicode_safe_json_dumps(data, status_code=200):
@@ -51,3 +50,31 @@ def unicode_safe_json_dumps(data, status_code=200):
         status_code,
         content_type='application/json; charset=utf8'
     )
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.split('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
+
+
+def upload_files(files, userId, postId):
+
+    url_list = []
+    directory = current_app.config['UPLOAD_FOLDER'] + '/' + userId + '/' + postId
+
+    if files and userId:
+        os.makedirs(directory)
+
+    for file in files:
+        print(file.filename)
+
+        if file and allowed_file(file.filename):
+            file_name = secure_filename(file.filename)
+            file.save(os.path.join(directory, file_name))
+
+            file_id = postId + '/' + file_name
+
+            from server.view.user.myPage.images import GETImages
+            url_list.append((url_for(GETImages, file_id)))
+
+    return url_list

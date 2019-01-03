@@ -65,5 +65,5 @@ class Config(object):
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
 
     # FILE UPLOAD CONFIGS(MUST BE CHANGED!)
-    UPLOAD_FOLDER = './resource'
+    UPLOAD_FOLDER = '../resource'
     ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'bmp', 'gif', 'png'])

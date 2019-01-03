@@ -13,7 +13,7 @@ class Post(db.Model):
     date = Column(db.DateTime, default=datetime.now)
 
     content = Column(db.String(100), nullable=False)
-    image = Column(db.String(100))
+    image = Column(db.ARRAY)
 
     like = Column(db.Integer, default=0)
     comment = Column(db.Integer, ForeignKey("comment.comment_id"), default=None)
