@@ -63,3 +63,7 @@ class Config(object):
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'GAE1GUL')
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+
+    # FILE UPLOAD CONFIGS(MUST BE CHANGED!)
+    UPLOAD_FOLDER = './resource'
+    ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'bmp', 'gif', 'png'])

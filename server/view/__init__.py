@@ -35,8 +35,14 @@ class Router():
         from server.view.user.myPage.MyPage import MyPage
         self.api.add_resource(MyPage, '/api/my-page')
 
-        from server.view.follow.following import Follow
-        self.api.add_resource(Follow, '/api/follow')
+        from server.view.follow.following import Following
+        self.api.add_resource(Following, '/api/follow')
+
+        from server.view.user.myPage.images import GETImages
+        self.api.add_resource(GETImages, '/api/images/<filename>')
+
+        from server.view.user.myPage.images import UploadImages
+        self.api.add_resource(UploadImages, '/api/upload-images/<postId>')
 
         from server.view.color.color import Color
         self.api.add_resource(Color, '/api/color')
