@@ -38,6 +38,9 @@ class Router():
         from server.view.follow.following import Follow
         self.api.add_resource(Follow, '/api/follow')
 
+        from server.view.color.color import Color
+        self.api.add_resource(Color, '/api/color')
+
 
 def unicode_safe_json_dumps(data, status_code=200):
     return Response(
