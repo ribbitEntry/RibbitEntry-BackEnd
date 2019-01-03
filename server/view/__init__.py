@@ -60,24 +60,36 @@ def allowed_file(filename):
            filename.split('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
 
 
-def upload_files(files, userId, postId):
-
+def upload_files(files, userId, postId=None, various=None):
     url_list = []
-    directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId + '/' + str(postId))
+    directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId)
 
     if files and userId:
-        os.makedirs(directory)
+        if not os.path.isdir(directory):
+            os.makedirs(directory)
+
+        if postId and not os.path.isdir(directory + '/' + postId):
+            os.makedirs(directory + '/' + postId)
+
+        if not postId and various and not os.path.isdir(directory + '/' + str(various)):
+            os.mkdir(directory + '/' + str(various))
+
+    if not postId and various and files != list and allowed_file(files.filename):
+        file_name = secure_filename(files.filename)
+        files.save(os.path.join(directory + '/' + str(various), file_name))
+
+        file_id = '?userId=' + userId + '&' + str(various) + '=' + file_name
+
+        return "http://ribbit.jaehoon.kim:5000/api/images" + file_id
 
     for file in files:
-        print(file.filename)
 
         if file and allowed_file(file.filename):
             file_name = secure_filename(file.filename)
-            file.save(os.path.join(directory, file_name))
+            file.save(os.path.join(directory + '/' + postId, file_name))
 
             file_id = '?postId=' + str(postId) + '&fileId=' + file_name
 
-            from server.view.user.myPage.images import GETImages
             url_list.append("http://ribbit.jaehoon.kim:5000/api/images" + file_id)
 
     return url_list

@@ -4,7 +4,7 @@ from flasgger import swag_from
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from server.view import unicode_safe_json_dumps
+from server.view import unicode_safe_json_dumps, upload_files
 from server.extensions import db
 from server.model.user import User
 from server.model.post import Post
@@ -37,9 +37,6 @@ class MyPage(Resource):
             return unicode_safe_json_dumps({"user_info": user_info_})
 
         elif user_info and post_info:
-            print(post_info)
-            for i in post_info:
-                print(i)
             return unicode_safe_json_dumps({
                 "user_info": user_info_,
                 "post": [
@@ -58,16 +55,18 @@ class MyPage(Resource):
     @jwt_required
     def post(self):
 
-        # try:
-        #     profile_image = request.json['profile_image']
-        # except:
-        #     profile_image = None
-
         userId = get_jwt_identity()
-        profile_image = request.json['profile_image']
-        background_image = request.json['background_image']
-        nickname = request.json['nickname']
-        introduction = request.json['introduction']
+        profile_image = request.files.get('profile_image')
+        background_image = request.files.get('background_image')
+        try:
+            nickname = request.form['nickname']
+        except:
+            nickname = None
+
+        try:
+            introduction = request.form['introduction']
+        except:
+            introduction = None
 
         user = User.query.filter(User.id == userId).first()
 
@@ -76,15 +75,15 @@ class MyPage(Resource):
             if profile_image or background_image or nickname or introduction:
 
                 if profile_image:
-                    user.proimg = profile_image
+                    user.proimg = upload_files(profile_image, userId, various='profile')
 
-                elif background_image:
-                    user.backimg = background_image
+                if background_image:
+                    user.backimg = upload_files(background_image, userId, various='background')
 
-                elif nickname:
+                if nickname:
                     user.nickname = nickname
 
-                elif introduction:
+                if introduction:
                     user.introduction = introduction
 
                 db.session.commit()
@@ -95,7 +94,3 @@ class MyPage(Resource):
 
         else:
             return {"status": "invalid authentication"}, 403
-
-
-
-
