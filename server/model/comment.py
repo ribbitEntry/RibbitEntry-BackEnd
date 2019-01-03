@@ -12,5 +12,4 @@ class Comment(db.Model):
     user = Column(db.String(50), ForeignKey("user.id"))
     date = Column(db.DateTime, default=datetime.now)
 
-    title = Column(db.String(50), nullable=False)
     content = Column(db.String(100), nullable=False)
