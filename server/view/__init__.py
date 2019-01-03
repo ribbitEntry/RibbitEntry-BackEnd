@@ -43,6 +43,9 @@ class Router():
         from server.view.user.myPage.images import GETImages
         self.api.add_resource(GETImages, '/api/images/<postId>/<fileId>')
 
+        from server.view.color.color import Color
+        self.api.add_resource(Color, '/api/color')
+
 
 def unicode_safe_json_dumps(data, status_code=200):
     return Response(
