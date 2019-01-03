@@ -63,7 +63,7 @@ def allowed_file(filename):
 def upload_files(files, userId, postId):
 
     url_list = []
-    directory = current_app.config['UPLOAD_FOLDER'] + '/' + userId + '/' + postId
+    directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId + '/' + str(postId))
 
     if files and userId:
         os.makedirs(directory)
@@ -75,9 +75,9 @@ def upload_files(files, userId, postId):
             file_name = secure_filename(file.filename)
             file.save(os.path.join(directory, file_name))
 
-            file_id = postId + '/' + file_name
+            file_id = str(postId) + '/' + file_name
 
             from server.view.user.myPage.images import GETImages
-            url_list.append((url_for(GETImages, file_id)))
+            url_list.append("http://ribbit.jaehoon.kim:5000/api/images/" + file_id)
 
     return url_list

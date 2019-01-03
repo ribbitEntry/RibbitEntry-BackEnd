@@ -17,8 +17,8 @@ class Posts(Resource):
     @jwt_required
     def post(self):
         userId = get_jwt_identity()
-        content = request.json['content']
-        nowaday = datetime.now()
+        content = request.form['content']
+        nowaday = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         # 파일 유무 확인
         try:
@@ -32,14 +32,17 @@ class Posts(Resource):
                 post = Post(content=content, user=userId, date=nowaday)
                 db.session.add(post)
                 db.session.commit()
+                print(nowaday)
+                print(post)
+                print(nowaday == post.date)
 
                 if files:
-                    before_post = Post.query.filter(Post.user == userId, Post.date == nowaday).first()
+                    before_post = Post.query.filter(Post.user == userId, Post.date == nowaday, Post.content == content).first()
                     postId = before_post.post_id
 
                     # 파일 업로드 및 링크 리스트 반환
                     urls = upload_files(files, userId, postId)
-                    before_post.image = urls
+                    before_post.image = ','.join(urls)
                     db.session.commit()
 
                 return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)

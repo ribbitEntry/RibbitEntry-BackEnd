@@ -21,7 +21,7 @@ class Login(Resource):
                 return {
                            'access_token': create_access_token(identity=userId),
                            'refresh_token': create_refresh_token(identity=userId),
-                           'color_set': 'processing'
+                           'color_set': User.query.filter(User.id == userId).first().theme_color
                        }, 200
             else:
                 return {"status": "Account is missing or incorrect password"}, 401
