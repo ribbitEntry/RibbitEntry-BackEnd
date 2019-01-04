@@ -2,7 +2,6 @@ from flask import request, current_app, send_from_directory
 from flask_restful import Resource
 
 from server.model.post import Post
-from server.model.user import User
 
 
 class GETImages(Resource):
@@ -11,7 +10,7 @@ class GETImages(Resource):
 
         args = request.args
 
-        if args.get('postId'):
+        if args.get('postId') and args.get('fileId'):
             userId = Post.query.filter(Post.post_id == args.get('postId')).first().user
             folder = current_app.config['UPLOAD_FOLDER'] + '/' + str(userId) + '/' + args.get('postId')
             file_name = args.get('fileId')
