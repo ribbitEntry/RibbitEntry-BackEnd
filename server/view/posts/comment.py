@@ -11,10 +11,11 @@ class PostComment(Resource):
 
     @jwt_required
     def post(self):
+        post_num = request.args.get('postId')
         content = request.json['content']
 
         if content:
-            comment = Comment(content=content, user=get_jwt_identity())
+            comment = Comment(content=content, user=get_jwt_identity(), post_id=post_num)
             db.session.add(comment)
             db.session.commit()
             return unicode_safe_json_dumps({'status': '글 작성 완료.'}, 200)
