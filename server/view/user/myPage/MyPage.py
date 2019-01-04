@@ -41,14 +41,13 @@ class MyPage(Resource):
                 "user_info": user_info_,
                 "post": [
                     {
-                        "title": posts.title,
                         "content": posts.content,
                         "image": posts.image,
                         "user": posts.user,
                         "date": str(posts.date),
                         "like": posts.like
                     } for posts in post_info]
-            })
+            }, 200)
 
     # 마이페이지 정보 수정(닉네임, 프로필 이미지, 배경 이미지)
     @swag_from(MY_PAGE_POST)
