@@ -46,6 +46,12 @@ class Router():
         from server.view.color.color import Color
         self.api.add_resource(Color, '/api/color')
 
+        from server.view.mainPage.post_comment import PostCommentView
+        self.api.add_resource(PostCommentView, '/api')
+
+        from server.view.posts.comment import PostComment
+        self.api.add_resource(PostComment, '/api/comment')
+
 
 def unicode_safe_json_dumps(data, status_code=200):
     return Response(
