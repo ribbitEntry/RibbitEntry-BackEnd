@@ -77,9 +77,7 @@ def upload_files(files, userId, postId=None, various=None):
     if not postId and various and files != list and allowed_file(files.filename):
         file_name = secure_filename(files.filename)
         files.save(os.path.join(directory + '/' + str(various), file_name))
-
         file_id = '?userId=' + userId + '&' + str(various) + '=' + file_name
-
         return "http://ribbit.jaehoon.kim:5000/api/images" + file_id
 
     for file in files:
@@ -87,9 +85,7 @@ def upload_files(files, userId, postId=None, various=None):
         if file and allowed_file(file.filename):
             file_name = secure_filename(file.filename)
             file.save(os.path.join(directory + '/' + postId, file_name))
-
             file_id = '?postId=' + str(postId) + '&fileId=' + file_name
-
             url_list.append("http://ribbit.jaehoon.kim:5000/api/images" + file_id)
 
     return url_list
