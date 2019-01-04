@@ -13,3 +13,5 @@ class Comment(db.Model):
     date = Column(db.DateTime, default=datetime.now)
 
     content = Column(db.String(100), nullable=False)
+    post_id = Column(db.Integer, ForeignKey("post.post_id"))
+
