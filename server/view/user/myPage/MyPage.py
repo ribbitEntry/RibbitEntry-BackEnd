@@ -57,11 +57,11 @@ class MyPage(Resource):
         userId = get_jwt_identity()
         profile_image = request.files.get('profile_image')
         background_image = request.files.get('background_image')
+
         try:
             nickname = request.form['nickname']
         except:
             nickname = None
-
         try:
             introduction = request.form['introduction']
         except:
