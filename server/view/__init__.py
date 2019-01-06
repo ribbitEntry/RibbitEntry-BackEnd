@@ -52,6 +52,9 @@ class Router():
         from server.view.posts.comment import PostComment
         self.api.add_resource(PostComment, '/api/comment')
 
+        from server.view.posts.like import Like
+        self.api.add_resource(Like, '/api/like')
+
 
 def unicode_safe_json_dumps(data, status_code=200):
     return Response(
