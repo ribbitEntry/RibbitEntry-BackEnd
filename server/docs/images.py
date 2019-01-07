@@ -1,7 +1,7 @@
 from . import param
 
 IMAGES_POST = {
-    'tags': ['my-page'],
+    'tags': ['images'],
     'parameters': [
         {
             'name': 'userId',
