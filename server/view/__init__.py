@@ -37,11 +37,11 @@ class Router():
         from server.view.user.myPage.myPage import MyPagePatch
         self.api.add_resource(MyPagePatch, '/api/<userId>')
 
-        from server.view.follow.following import Following
-        self.api.add_resource(Following, '/api/<userId>/following')
-
         from server.view.follow.following import Follower
         self.api.add_resource(Follower, '/api/<userId>/follower')
+
+        from server.view.follow.following import Following
+        self.api.add_resource(Following, '/api/<userId>/following')
 
         from server.view.images.images import GETImages
         self.api.add_resource(GETImages, '/api/images')
