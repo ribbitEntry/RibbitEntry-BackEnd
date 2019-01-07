@@ -27,7 +27,7 @@ LOGIN_POST = {
 SIGNUP_POST = {
     'tags': ['login'],
     'parameters': [
-        param('userId', '이메일'),
+        param('id', '아이디'),
         param('password', '비밀번호'),
         param('nickname', '닉네임')
     ],

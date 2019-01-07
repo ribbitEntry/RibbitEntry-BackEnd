@@ -13,16 +13,16 @@ class SignUp(Resource):
     @swag_from(SIGNUP_POST)
     def post(self):
         payload = request.json
-        email = payload['userId']
+        user_id = payload['id']
         password = payload['password']
         nickname = payload['nickname']
-        if email and password and nickname:
+        if user_id and password and nickname:
 
-            if User.query.filter(User.id == email).first():
+            if User.query.filter(User.id == user_id).first():
                 return {"status": "The ID already exists."}, 409
 
             else:
-                user = User(id=email, pw=password, nickname=nickname, theme_color='default')
+                user = User(id=user_id, pw=password, nickname=nickname, theme_color='default')
                 db.session.add(user)
                 db.session.commit()
                 return {"status": "sign-up has been succeed"}, 201
