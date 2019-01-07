@@ -21,6 +21,6 @@ class Color(Resource):
             user = User.query.filter(User.id == user_id).first()
             user.theme_color = color
             db.session.commit()
-            return {'color': User.theme_color}, 200
+            return {'color': user.theme_color}, 200
         else:
             return unicode_safe_json_dumps({'status': 'JWT 인증에 실패하였거나 색상코드가 없습니다.'}, 400)
