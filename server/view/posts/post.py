@@ -54,6 +54,7 @@ class Posts(Resource):
     @jwt_required
     def delete(self):
         post_id = request.json['post_id']
+        # 계정 확인 커리문 필요(본인의 게시물만 삭제 가능)
 
         if Post.query.filter(Post.post_id == post_id):
             Post.query.filter(Post.post_id == post_id).delete()

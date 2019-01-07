@@ -12,10 +12,8 @@ from server.extensions import db
 
 class Following(Resource):
 
-    @jwt_required
     @swag_from(FOLLOW_GET)
-    def get(self):
-        userId = get_jwt_identity()
+    def get(self, userId):
 
         # 만약 userId 가 있고 일치한 회원정보가 있을 경우 해당 회원의 팔로워 반환
         if userId and User.query.filter(User.id == userId).first():
@@ -32,10 +30,8 @@ class Following(Resource):
         else:
             return {"status": "invalid authentication"}, 401
 
-    @jwt_required
     @swag_from(FOLLOW_POST)
-    def post(self):
-        userId = get_jwt_identity()
+    def patch(self, userId):
         be_followed = request.json['userId']
         user_query = User.query.filter(User.id == userId).first()
         passive_user_query = User.query.filter(User.id == be_followed).first()
@@ -54,10 +50,8 @@ class Following(Resource):
             db.session.commit()
             return {"status": "It was succeed that adding follow info"}, 201
 
-    @jwt_required
     @swag_from(FOLLOW_DELETE)
-    def delete(self):
-        userId = get_jwt_identity()
+    def delete(self, userId):
         be_deleted = request.json['userId']
         user_query = User.query.filter(User.id == userId).first()
         passive_user_query = User.query.filter(User.id == be_deleted).first()
@@ -80,3 +74,15 @@ class Following(Resource):
 
         else:
             return {"status": "invalid authentication"}, 401
+
+
+class Follower(Resource):
+
+    def get(self, userId):
+        pass
+
+    def patch(self, userId):
+        pass
+
+    def delete(self, userId):
+        pass

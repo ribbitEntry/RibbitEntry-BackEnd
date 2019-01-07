@@ -18,6 +18,7 @@ class Like(Resource):
         post = Post.query.filter_by(postId=int(postId)).first()
         
         if user and post:
+            pass
             
         else:
             return {"status": "invalid user authentication"}, 401

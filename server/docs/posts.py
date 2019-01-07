@@ -10,16 +10,30 @@ POST_POST = {
             'type': 'str',
             'required': True
         },
-        param('title', "제목"),
-        param('content', "내용"),
-        param('image', "이미지")
+        {
+            'name': 'content',
+            'description': "게시글 내용",
+            'in': 'form',
+            'type': 'str',
+            'required': True
+        },
+        {
+            'name': 'file',
+            'description': "배열 형태의 파일",
+            'in': 'from',
+            'type': 'file',
+            'required': True
+        }
     ],
     'responses': {
         '201': {
-            'description': "글 작성 성공",
+            'description': "글 작성 완료",
         },
         '400': {
-            'description': "제목, 내용을 모두 채워주세요."
+            'description': "내용을 작성해주세요."
+        },
+        '401': {
+            'description': "일치하지 않는 인증 정보입니다."
         }
     }
 }
@@ -38,7 +52,10 @@ POST_DELETE = {
     ],
     'responses': {
         '200': {
-            'description': "글 삭제 성공",
+            'description': "글 삭제 성공"
+        },
+        '400': {
+            'description': "없는 글입니다."
         }
     }
 }

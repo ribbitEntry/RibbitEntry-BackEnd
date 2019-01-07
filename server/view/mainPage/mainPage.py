@@ -15,8 +15,8 @@ class MainPage(Resource):
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
-        user_info = User.quere.filter(User.id == user_id).first()
-        my_follow = Follow.quere.filter(Follow.follow == user_id).all()
+        user_info = User.query.filter(User.id == user_id).first()
+        my_follow = Follow.query.filter(Follow.follow == user_id).all()
         post_info = my_follow(Post.user == Follow.follower).all()
 
         user_info_ = {
