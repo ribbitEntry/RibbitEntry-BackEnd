@@ -7,21 +7,16 @@ from server.model.post import Post
 from server.model.user import User
 from server.model.follow import Follow
 from server.view import unicode_safe_json_dumps
-from server.view import session
 
 
 class MainPage(Resource):
-
     @swag_from(MAIN_PAGE_GET)
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
 
-        # my_follow = Follow.query.filter(Follow.follow == user_id).all()
-        # post_info = my_follow(Post.user == Follow.follower).all()
-
-        main_post = Post.query.filter(Post.user == Follow.follow == user_id).all().order_by(Post.date)
+        post_info = Post.query.filter(Follow.follow == user_id).filter(Post.user == Follow.follower).all()
 
         user_info_ = {
             "user_id" : user_info.id,
@@ -36,19 +31,18 @@ class MainPage(Resource):
         if not user_info:
             return {"status": "없는 유저입니다."}, 401
 
-        elif user_info and not main_post:
+        elif user_info and not post_info:
             return unicode_safe_json_dumps({"user_info": user_info_}, 200)
 
-        elif user_info and main_post:
+        elif user_info and post_info:
             return {
                        "user_info": user_info_,
                        "post": [
                            {
-                               "title": posts.title,
                                "content": posts.content,
                                "image": posts.image,
                                "user": posts.user,
-                               "date": posts.date,
+                               "date": str(posts.date),
                                "like": posts.like,
-                           } for posts in main_post]
+                           } for posts in post_info]
                    }, 200
