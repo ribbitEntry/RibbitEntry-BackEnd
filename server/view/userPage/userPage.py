@@ -16,6 +16,10 @@ class UserPage(Resource):
         user_info = User.query.filter(User.id == user).first()
         post_info = Post.query.filter(Post.user == user).all()
 
+        print("----------")
+        print(post_info)
+        print("-----------")
+
         user_info_ = {
             "nickname": user_info.nickname,
             "profile_image": user_info.proimg,
@@ -23,14 +27,6 @@ class UserPage(Resource):
             "introduction": user_info.introduction,
             "follow_num": user_info.follow_num,
             "follower_num": user_info.follower_num
-        }
-
-        post_info_ = {
-            "content": str(post_info.content),
-            "image": post_info.image,
-            "user": post_info.user,
-            "date": str(post_info.date),
-            "like": post_info.like
         }
 
         if not user_info:
@@ -42,5 +38,11 @@ class UserPage(Resource):
         elif user_info and post_info:
             return unicode_safe_json_dumps({
                 "user_info": user_info_,
-                "post": post_info_
+                "post": [{
+                    "content": posts.content,
+                    "image": posts.image,
+                    "user": posts.user,
+                    "date": str(posts.date),
+                    "like": posts.like
+                } for posts in post_info]
             }, 200)
