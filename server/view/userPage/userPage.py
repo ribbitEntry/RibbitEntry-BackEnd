@@ -13,7 +13,7 @@ class UserPage(Resource):
     def get(self, user):
 
         user_info = User.query.filter(User.id == user).first()
-        post_info = Post.query.filter(Post.user == user).all().order_by(Post.date)
+        post_info = Post.query.filter(Post.user == user).order_by(Post.date).all()
 
         user_info_ = {
             "nickname": user_info.nickname,
