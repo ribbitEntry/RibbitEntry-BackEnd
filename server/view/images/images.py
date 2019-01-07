@@ -1,11 +1,14 @@
 from flask import request, current_app, send_from_directory
 from flask_restful import Resource
+from flasgger import swag_from
 
 from server.model.post import Post
+from server.docs.images import IMAGES_POST
 
 
 class GETImages(Resource):
 
+    @swag_from(IMAGES_POST)
     def get(self):
 
         args = request.args

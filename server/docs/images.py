@@ -1,26 +1,47 @@
 from . import param
 
-IMAGES_GET = {
-    'tags': ['follow'],
+IMAGES_POST = {
+    'tags': ['my-page'],
     'parameters': [
         {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
+            'name': 'userId',
+            'description': "유저아이디",
+            'in': 'url',
             'type': 'str',
-            'required': True
+            'required': False
         },
-        param('userId', '팔로우할 유저의 이메일(아이디)')
+        {
+            'name': 'postId',
+            'description': "게시글 고유번호",
+            'in': 'url',
+            'type': 'str',
+            'required': False
+        },
+        {
+            'name': 'fileId',
+            'description': "파일 위치",
+            'in': 'url',
+            'type': 'str',
+            'required': False
+        },
+        {
+            'name': 'profile',
+            'description': "프로필",
+            'in': 'url',
+            'type': 'str',
+            'required': False
+        },
+        {
+            'name': 'background',
+            'description': "배경 이미지",
+            'in': 'url',
+            'type': 'str',
+            'required': False
+        }
     ],
     'responses': {
-        '201': {
-            'description': "팔로우 성공"
-        },
-        '400': {
-            'description': "존재하지 않는 대상입니다."
-        },
-        '400': {
-            'description': "JWT 인증 실패"
+        '200': {
+            'description': "파일 반환 성공"
         }
     }
 }
