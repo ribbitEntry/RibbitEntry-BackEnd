@@ -5,10 +5,11 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from server.model.user import User
 from server.model.post import Post
+from server.docs.like import LIKE_PATCH
 
 
 class Like(Resource):
-    @swag_from()
+    @swag_from(LIKE_PATCH)
     @jwt_required
     def post(self):
         userId = get_jwt_identity()
