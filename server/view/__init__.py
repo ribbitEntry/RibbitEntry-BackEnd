@@ -28,10 +28,10 @@ class Router():
         from server.view.search.search import Search
         self.api.add_resource(Search, '/api/search')
 
-        from server.view.posts.post import Posts
+        from server.view.posts.posts import Posts
         self.api.add_resource(Posts, '/api/post')
 
-        from server.view.posts.post import PostElement
+        from server.view.posts.posts import PostElement
         self.api.add_resource(PostElement, '/api/post/<postId>')
 
         from server.view.mainPage.mainPage import MainPage
