@@ -16,6 +16,7 @@ class UserPage(Resource):
         post_info = Post.query.filter(Post.user == user).order_by(Post.date).all()
 
         user_info_ = {
+            "user_id" : user_info.id,
             "nickname": user_info.nickname,
             "profile_image": user_info.proimg,
             "background_image": user_info.backimg,

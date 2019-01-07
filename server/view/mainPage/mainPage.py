@@ -16,7 +16,7 @@ class MainPage(Resource):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
 
-        post_info = Post.query.filter(Follow.follow == user_id).filter(Post.user == Follow.follower).all()
+        post_info = Post.query.filter(Follow.follow == user_id).filter(Post.user == Follow.follower).order_by().all()
 
         user_info_ = {
             "user_id" : user_info.id,

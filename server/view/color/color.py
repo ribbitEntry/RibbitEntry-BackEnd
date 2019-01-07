@@ -13,14 +13,13 @@ class Color(Resource):
 
     @swag_from(COLOR_POST)
     @jwt_required
-    def post(self):
+    def post(self, userId):
         color = request.json['color']
-        user_id = get_jwt_identity()
 
         if color:
-            user = User.query.filter(User.id == user_id).first()
+            user = User.query.filter(User.id == userId).first()
             user.theme_color = color
             db.session.commit()
-            return {'color': user.theme_color}, 201
+            return {'color': user.theme_color}, 200
         else:
-            return unicode_safe_json_dumps({'status': '컬러가 없습니다.'}, 400)
+            return unicode_safe_json_dumps({'status': 'JWT 인증에 실패하였거나 색상코드가 없습니다.'}, 400)
