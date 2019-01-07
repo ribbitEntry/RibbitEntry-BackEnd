@@ -11,7 +11,7 @@ class PostCommentView(Resource):
     def get(self):
         post_num = request.args.get('postId')
         post_info = Post.quere.filter(Post.post_id == post_num).first()
-        comment = Comment.quere.filter(Comment.post_id == post_num).all()
+        comment = Comment.quere.filter(Comment.post_id == post_num).all().order_by(Post.date)
 
         post_info = {
             "content": post_info.content,

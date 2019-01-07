@@ -21,7 +21,7 @@ class MainPage(Resource):
         # my_follow = Follow.query.filter(Follow.follow == user_id).all()
         # post_info = my_follow(Post.user == Follow.follower).all()
 
-        main_post = Post.query.filter(Post.user == Follow.follow == user_id).all()
+        main_post = Post.query.filter(Post.user == Follow.follow == user_id).all().order_by(Post.date)
 
         user_info_ = {
             "user_id" : user_info.id,

@@ -62,7 +62,7 @@ class Router():
         self.api.add_resource(Like, '/api/<postId>/like')
 
         from server.view.userPage.userPage import UserPage
-        self.api.add_resource(UserPage, '/api/<userId>')
+        self.api.add_resource(UserPage, '/api/<user>/profile')
 
 
 def unicode_safe_json_dumps(data, status_code=200):
