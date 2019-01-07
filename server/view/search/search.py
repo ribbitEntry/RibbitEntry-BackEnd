@@ -18,7 +18,8 @@ class Search(Resource):
             return unicode_safe_json_dumps(
                 [{
                 "nickname": user.nickname,
-                "profile_image": user.proimg
+                "profile_image": user.proimg,
+                "user_id": user.id
             } for user in user_info], 200)
 
         else:
