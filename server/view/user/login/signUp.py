@@ -13,7 +13,7 @@ class SignUp(Resource):
     @swag_from(SIGNUP_POST)
     def post(self):
         payload = request.json
-        user_id = payload['id']
+        user_id = payload['userId']
         password = payload['password']
         nickname = payload['nickname']
         if user_id and password and nickname:
