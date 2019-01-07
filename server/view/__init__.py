@@ -23,7 +23,7 @@ class Router():
         self.api.add_resource(SignUp, '/api/signUp')
 
         from server.view.web.web import Web
-        self.api.add_resource(Web, '/status')
+        self.api.add_resource(Web, '/api/status')
 
         from server.view.search.search import Search
         self.api.add_resource(Search, '/api/search')
@@ -62,7 +62,7 @@ class Router():
         self.api.add_resource(Like, '/api/<postId>/like')
 
         from server.view.userPage.userPage import UserPage
-        self.api.add_resource(UserPage, '/api/<userId>/profile')
+        self.api.add_resource(UserPage, '/api/<userId>')
 
 
 def unicode_safe_json_dumps(data, status_code=200):
