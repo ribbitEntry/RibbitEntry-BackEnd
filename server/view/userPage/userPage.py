@@ -1,6 +1,6 @@
 from flasgger import swag_from
 from flask_restful import Resource
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import request
 
 from server.view import unicode_safe_json_dumps
 from server.model.user import User
@@ -11,9 +11,8 @@ from server.docs.userpage import USER_PAGE_GET
 class UserPage(Resource):
 
     @swag_from(USER_PAGE_GET)
-    @jwt_required
     def get(self, ):
-        user_id = get_jwt_identity()
+        user_id = request.args.get('userId')
         user_info = User.query.filter(User.id == user_id).first()
         post_info = Post.query.filter(Post.user == user_id).all()
 
