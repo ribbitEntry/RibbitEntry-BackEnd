@@ -52,6 +52,11 @@ class Config(object):
             {
                 'name': 'user-page',
                 'description': '유저페이지'
+            },
+
+            {
+                'name': 'images',
+                'description': '이미지'
             }
         ]
     }
