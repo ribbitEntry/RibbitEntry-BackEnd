@@ -1,13 +1,19 @@
 from . import param
 
-SEARCH_POST = {
+SEARCH_GET = {
     'tags': ['search'],
     'parameters': [
-        param('search_word', "검색어"),
+        {
+            'name': 'word',
+            'description': "검색어(사용 예시: /api/search?word=신은주열심히일해라",
+            'in': 'url parameter',
+            'type': 'str',
+            'required': True
+        }
     ],
     'responses': {
         '200': {
-            'description': "검색 성",
+            'description': "검색 성공",
             'example': [
                 {
                     'user_id': 'dsm2018@gmail.com',
