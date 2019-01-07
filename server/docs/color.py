@@ -13,8 +13,8 @@ COLOR_POST = {
         param('color', '변경할 색')
     ],
     'responses': {
-        '201': {
-            'description': "팔로우 성공",
+        '200': {
+            'description': "색상 변경 성공",
             "example": {'color': "나는야 색상코드"}
         },
         '400': {
