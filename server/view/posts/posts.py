@@ -22,9 +22,28 @@ class Posts(Resource):
         content = request.form['content']
         nowaday = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # 파일 유무 확인 함수 호출
-        files = request.files
-        detect_and_set_file(files)
+        # 파일 유무 확인
+        files = []
+        try:
+            first_file = request.files.get('file[1]')
+            files.append(first_file)
+        except:
+            first_file = None
+        try:
+            second_file = request.files.get('file[2]')
+            files.append(second_file)
+        except:
+            second_file = None
+        try:
+            third_file = request.files.get('file[3]')
+            files.append(third_file)
+        except:
+            third_file = None
+        try:
+            fourth_file = request.files.get('file[4]')
+            files.append(fourth_file)
+        except:
+            fourth_file = None
 
         if User.query.filter(User.id == userId).first():
 
