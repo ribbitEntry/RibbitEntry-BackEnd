@@ -9,6 +9,7 @@ from server.extensions import db
 from server.model.user import User
 from server.model.post import Post
 from server.view import unicode_safe_json_dumps, upload_files
+from server.view.posts import detect_and_set_file
 
 
 # postId를 불러오지 않는 클래스 선언
@@ -21,11 +22,9 @@ class Posts(Resource):
         content = request.form['content']
         nowaday = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # 파일 유무' 확인
-        try:
-            files = request.files.getlist("file")
-        except:
-            files = None
+        # 파일 유무 확인 함수 호출
+        files = request.files
+        detect_and_set_file(files)
 
         if User.query.filter(User.id == userId).first():
 
@@ -67,11 +66,13 @@ class PostElement(Resource):
     @swag_from(POST_ELEMENT_DELETE)
     @jwt_required
     def delete(self, postId):
-        post_id = request.json['post_id']
-        # 계정 확인 커리문 필요(본인의 게시물만 삭제 가능)
 
-        if Post.query.filter(Post.post_id == post_id):
-            Post.query.filter(Post.post_id == post_id).delete()
+        # 계정 확인 커리문 필요(본인의 게시물만 삭제 가능)
+        post_id = request.json['post_id']
+        post = Post.query.filter(Post.post_id == post_id).first()
+
+        if post.user == get_jwt_identity():
+            post.delete()
             db.session.commit()
             return unicode_safe_json_dumps({'status': '글이 삭제되었습니다.'}, 200)
         else:
