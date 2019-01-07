@@ -24,6 +24,7 @@ class MainPage(Resource):
         main_post = Post.query.filter(Post.user == Follow.follow == user_id).all()
 
         user_info_ = {
+            "user_id" : user_info.id,
             "nickname": user_info.nickname,
             "profile_image": user_info.proimg,
             "background_image": user_info.backimg,
