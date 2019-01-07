@@ -12,7 +12,7 @@ class UserPage(Resource):
 
     @swag_from(USER_PAGE_GET)
     @jwt_required
-    def get(self):
+    def get(self, ):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
         post_info = Post.query.filter(Post.user == user_id).all()

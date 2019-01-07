@@ -38,7 +38,7 @@ class Router():
         self.api.add_resource(MainPage, '/api/main')
 
         from server.view.user.myPage.myPage import MyPagePatch
-        self.api.add_resource(MyPagePatch, '/api/<userId>')
+        self.api.add_resource(MyPagePatch, '/api/<userId>/settings')
 
         from server.view.follow.following import Follower
         self.api.add_resource(Follower, '/api/<userId>/follower')
@@ -60,6 +60,9 @@ class Router():
 
         from server.view.posts.like import Like
         self.api.add_resource(Like, '/api/<postId>/like')
+
+        from server.view.userPage.userPage import UserPage
+        self.api.add_resource(UserPage, '/api/<userId>/profile')
 
 
 def unicode_safe_json_dumps(data, status_code=200):
