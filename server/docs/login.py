@@ -37,7 +37,7 @@ SIGNUP_POST = {
         },
         '400': {
             'description': "인자가 부족합니다."
-        }
+        },
         '409': {
             'description': '회원가입 실패(중복된 이메일)'
         }
