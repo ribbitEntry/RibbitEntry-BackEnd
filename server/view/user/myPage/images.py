@@ -10,6 +10,8 @@ class GETImages(Resource):
 
         args = request.args
 
+
+
         if args.get('postId') and args.get('fileId'):
             userId = Post.query.filter(Post.post_id == args.get('postId')).first().user
             folder = current_app.config['UPLOAD_FOLDER'] + '/' + str(userId) + '/' + args.get('postId')
