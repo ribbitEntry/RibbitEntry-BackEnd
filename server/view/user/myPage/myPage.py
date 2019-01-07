@@ -9,7 +9,7 @@ from server.extensions import db
 from server.docs.myPage import MY_PAGE_POST
 
 
-# 마이페이지 정보 수정(닉네임, 프로필 이미지, 배경 이미지)\
+# 마이페이지 정보 수정(닉네임, 프로필 이미지, 배경 이미지)
 class MyPagePatch(Resource):
 
     @swag_from(MY_PAGE_POST)
