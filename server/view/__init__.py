@@ -35,7 +35,7 @@ class Router():
         self.api.add_resource(PostElement, '/api/post/<postId>')
 
         from server.view.mainPage.mainPage import MainPage
-        self.api.add_resource(MainPage, '/api/main/<userId>')
+        self.api.add_resource(MainPage, '/api/main')
 
         from server.view.user.myPage.myPage import MyPagePatch
         self.api.add_resource(MyPagePatch, '/api/<userId>')

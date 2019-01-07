@@ -18,14 +18,15 @@ class MainPage(Resource):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
 
-        #my_follow = Follow.query.filter(Follow.follow == user_id).all()
-        #post_info = my_follow(Post.user == Follow.follower).all()
+        # my_follow = Follow.query.filter(Follow.follow == user_id).all()
+        # post_info = my_follow(Post.user == Follow.follower).all()
 
         main_post = Post.query.filter(Post.user == Follow.follow == user_id).all()
 
         user_info_ = {
             "nickname": user_info.nickname,
             "profile_image": user_info.proimg,
+            "background_image": user_info.backimg,
             "introduction": user_info.introduction,
             "follow_num": user_info.follow_num,
             "follower_num": user_info.follower_num
