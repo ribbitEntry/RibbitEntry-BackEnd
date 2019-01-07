@@ -38,7 +38,10 @@ class Router():
         self.api.add_resource(MyPage, '/api/my-page')
 
         from server.view.follow.following import Following
-        self.api.add_resource(Following, '/api/follow')
+        self.api.add_resource(Follow, '/api/<userId>/following')
+
+        from server.view.follow.following import Follower
+        self.api.add_resource(Follower, '/api/<userId>/follower')
 
         from server.view.user.myPage.images import GETImages
         self.api.add_resource(GETImages, '/api/images')
