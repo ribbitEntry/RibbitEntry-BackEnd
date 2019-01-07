@@ -4,16 +4,17 @@ from flask import request
 from datetime import datetime
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from server.docs.posts import POST_POST, POST_DELETE
+from server.docs.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
 from server.extensions import db
 from server.model.user import User
 from server.model.post import Post
 from server.view import unicode_safe_json_dumps, upload_files
 
 
+# postId를 불러오지 않는 클래스 선언
 class Posts(Resource):
 
-    @swag_from(POST_POST)
+    @swag_from(POSTS_POST)
     @jwt_required
     def post(self):
         userId = get_jwt_identity()
@@ -34,7 +35,11 @@ class Posts(Resource):
                 db.session.commit()
 
                 if files:
-                    before_post = Post.query.filter(Post.user == userId, Post.date == nowaday, Post.content == content).first()
+                    before_post = Post.query.filter(
+                        Post.user == userId,
+                        Post.date == nowaday,
+                        Post.content == content
+                    ).first()
                     postId = before_post.post_id
 
                     # 파일 업로드 및 링크 리스트 반환
@@ -50,9 +55,18 @@ class Posts(Resource):
         else:
             return unicode_safe_json_dumps({'status': '일치하지 않는 인증 정보입니다.'}, 401)
 
-    @swag_from(POST_DELETE)
+
+# postId를 받아오는 GET, DELETE 메소드를 위한 클래스 선언
+class PostElement(Resource):
+
+    @swag_from(POST_ELEMENT_GET)
     @jwt_required
-    def delete(self):
+    def get(self, postId):
+        pass
+
+    @swag_from(POST_ELEMENT_DELETE)
+    @jwt_required
+    def delete(self, postId):
         post_id = request.json['post_id']
         # 계정 확인 커리문 필요(본인의 게시물만 삭제 가능)
 

@@ -7,22 +7,12 @@ SEARCH_POST = {
     ],
     'responses': {
         '200': {
-            'description': "검색시작",
+            'description': "검색 성",
             'example': [
                 {
-                    'userId': 'dsm2018@gmail.com',
+                    'user_id': 'dsm2018@gmail.com',
                     'nickname': '대마고',
-                    'profile_image': 'http://ribbit.jaehoon.kim:5000/api/user/profile-image/dsm2018',
-                    'following': [
-                        {
-                            'nickname': '곰돌이1'
-                        }
-                    ],
-                    'follower': [
-                        {
-                            'nickname': '곰돌이2'
-                        }
-                    ]
+                    'profile_image': 'http://ribbit.jaehoon.kim:5000/api/user/profile-image/dsm2018'
                 }
             ]
         },

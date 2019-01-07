@@ -9,6 +9,7 @@ from server.view import unicode_safe_json_dumps
 
 class Search(Resource):
 
+    # 수정요구: 메소드 [post] -> [get] 변경, request 대신 url parameter 사용
     @swag_from(SEARCH_POST)
     def post(self):
         search_word = request.json['search_word']
@@ -16,11 +17,12 @@ class Search(Resource):
 
         if user_info:
             return unicode_safe_json_dumps(
-                [{
-                "nickname": user.nickname,
-                "profile_image": user.proimg,
-                "user_id": user.id
-            } for user in user_info], 200)
+                [
+                    {
+                        "nickname": user.nickname,
+                        "profile_image": user.proimg,
+                        "user_id": user.id
+                    } for user in user_info], 200)
 
         else:
             return unicode_safe_json_dumps({"status": "없는 유저입니다."}, 404)

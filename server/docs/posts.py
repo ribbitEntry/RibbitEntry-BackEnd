@@ -1,6 +1,6 @@
 from . import param
 
-POST_POST = {
+POSTS_POST = {
     'tags': ['posts'],
     'parameters': [
         {
@@ -18,11 +18,32 @@ POST_POST = {
             'required': True
         },
         {
-            'name': 'file',
-            'description': "배열 형태의 파일",
+            'name': 'file[1]',
+            'description': "첫번째 파일",
             'in': 'from',
             'type': 'file',
-            'required': True
+            'required': False
+        },
+        {
+            'name': 'file[2]',
+            'description': "두번째 파일",
+            'in': 'from',
+            'type': 'file',
+            'required': False
+        },
+        {
+            'name': 'file[3]',
+            'description': "세번째 파일",
+            'in': 'from',
+            'type': 'file',
+            'required': False
+        },
+        {
+            'name': 'file[4]',
+            'description': "네번째 파일",
+            'in': 'from',
+            'type': 'file',
+            'required': False
         }
     ],
     'responses': {
@@ -38,7 +59,19 @@ POST_POST = {
     }
 }
 
-POST_DELETE = {
+POST_ELEMENT_GET = {
+    'tags': ['posts'],
+    'responses': {
+        '200': {
+            'description': "글 조회 성공"
+        },
+        '400': {
+            'description': "존재하지 않는 게시글의 번호입니다."
+        }
+    }
+}
+
+POST_ELEMENT_DELETE = {
     'tags': ['posts'],
     'parameters': [
         {
@@ -47,8 +80,7 @@ POST_DELETE = {
             'in': 'header',
             'type': 'str',
             'required': True
-        },
-        param('post_id', "제목")
+        }
     ],
     'responses': {
         '200': {
