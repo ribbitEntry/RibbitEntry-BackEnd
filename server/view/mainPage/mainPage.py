@@ -7,6 +7,7 @@ from server.model.post import Post
 from server.model.user import User
 from server.model.follow import Follow
 from server.view import unicode_safe_json_dumps
+from server.view import session
 
 
 class MainPage(Resource):
@@ -16,8 +17,11 @@ class MainPage(Resource):
     def get(self):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
-        my_follow = Follow.query.filter(Follow.follow == user_id).all()
-        post_info = my_follow(Post.user == Follow.follower).all()
+
+        #my_follow = Follow.query.filter(Follow.follow == user_id).all()
+        #post_info = my_follow(Post.user == Follow.follower).all()
+
+        main_post = Post.query.filter(Post.user == Follow.follow == user_id).all()
 
         user_info_ = {
             "nickname": user_info.nickname,
@@ -30,10 +34,10 @@ class MainPage(Resource):
         if not user_info:
             return {"status": "없는 유저입니다."}, 401
 
-        elif user_info and not post_info:
+        elif user_info and not main_post:
             return unicode_safe_json_dumps({"user_info": user_info_}, 200)
 
-        elif user_info and post_info:
+        elif user_info and main_post:
             return {
                        "user_info": user_info_,
                        "post": [
@@ -44,5 +48,5 @@ class MainPage(Resource):
                                "user": posts.user,
                                "date": posts.date,
                                "like": posts.like,
-                           } for posts in post_info]
+                           } for posts in main_post]
                    }, 200
