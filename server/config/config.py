@@ -47,6 +47,11 @@ class Config(object):
             {
                 'name': 'main-page',
                 'description': '메인화면'
+            },
+
+            {
+                'name': 'user-page',
+                'description': '유저페이지'
             }
         ]
     }
