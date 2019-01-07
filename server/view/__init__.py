@@ -20,19 +20,19 @@ class Router():
         self.api.add_resource(Login, '/api/login')
 
         from server.view.user.login.signUp import SignUp
-        self.api.add_resource(SignUp, '/api/sign-up')
+        self.api.add_resource(SignUp, '/api/signUp')
 
         from server.view.web.web import Web
-        self.api.add_resource(Web, '/server-status')
+        self.api.add_resource(Web, '/status')
 
         from server.view.search.search import Search
         self.api.add_resource(Search, '/api/search')
 
-        from server.view.posts.post import Post
-        self.api.add_resource(Post, '/api/post')
+        from server.view.posts.post import Posts
+        self.api.add_resource(Posts, '/api/post/<postId>')
 
         from server.view.mainPage.mainPage import MainPage
-        self.api.add_resource(MainPage, '/api/main')
+        self.api.add_resource(MainPage, '/api/main/<userId>')
 
         from server.view.user.myPage.myPage import MyPagePatch
         self.api.add_resource(MyPagePatch, '/api/<userId>')

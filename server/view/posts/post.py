@@ -20,7 +20,7 @@ class Posts(Resource):
         content = request.form['content']
         nowaday = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # 파일 유무 확인
+        # 파일 유무' 확인
         try:
             files = request.files.getlist("file")
         except:

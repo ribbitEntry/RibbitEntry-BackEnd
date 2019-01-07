@@ -15,6 +15,9 @@ LOGIN_POST = {
                 "color_set": "yellow"
             }
         },
+        '400': {
+            'description': "인자가 부족합니다."
+        },
         '401': {
             'description': "없는 ID이거나 비밀번호가 틀렸습니다."
         }
@@ -31,6 +34,9 @@ SIGNUP_POST = {
     'responses': {
         '201': {
             'description': '회원가입 성공'
+        },
+        '400': {
+            'description': "인자가 부족합니다."
         },
         '409': {
             'description': '회원가입 실패(중복된 이메일)'
