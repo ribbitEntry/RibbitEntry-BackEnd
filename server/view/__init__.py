@@ -28,14 +28,14 @@ class Router():
         from server.view.search.search import Search
         self.api.add_resource(Search, '/api/search')
 
-        from server.view.posts.post import Posts
-        self.api.add_resource(Posts, '/api/posts')
+        from server.view.posts.post import Post
+        self.api.add_resource(Post, '/api/post')
 
-        from server.view.mainPage.MainPage import MainPage
-        self.api.add_resource(MainPage, '/api/main-page')
+        from server.view.mainPage.mainPage import MainPage
+        self.api.add_resource(MainPage, '/api/main')
 
-        from server.view.user.myPage.MyPage import MyPage
-        self.api.add_resource(MyPage, '/api/my-page')
+        from server.view.user.myPage.myPage import MyPagePatch
+        self.api.add_resource(MyPagePatch, '/api/<userId>')
 
         from server.view.follow.following import Following
         self.api.add_resource(Following, '/api/<userId>/following')
@@ -43,20 +43,20 @@ class Router():
         from server.view.follow.following import Follower
         self.api.add_resource(Follower, '/api/<userId>/follower')
 
-        from server.view.user.myPage.images import GETImages
+        from server.view.images.images import GETImages
         self.api.add_resource(GETImages, '/api/images')
 
         from server.view.color.color import Color
-        self.api.add_resource(Color, '/api/color')
+        self.api.add_resource(Color, '/api/<userId>/color')
 
         from server.view.mainPage.post_comment import PostCommentView
-        self.api.add_resource(PostCommentView, '/api')
+        self.api.add_resource(PostCommentView, '/api/<postId>')
 
         from server.view.posts.comment import PostComment
-        self.api.add_resource(PostComment, '/api/comment')
+        self.api.add_resource(PostComment, '/api/<postId>/comment')
 
         from server.view.posts.like import Like
-        self.api.add_resource(Like, '/api/like')
+        self.api.add_resource(Like, '/api/<postId>/like')
 
 
 def unicode_safe_json_dumps(data, status_code=200):
