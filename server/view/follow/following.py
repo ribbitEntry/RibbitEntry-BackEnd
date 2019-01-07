@@ -3,16 +3,24 @@ from flasgger import swag_from
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from server.docs.follow import FOLLOW_GET, FOLLOW_POST, FOLLOW_DELETE
+from server.docs.follow import FOLLOWER_GET, FOLLOWING_GET, FOLLOWING_PATCH, FOLLOWING_DELETE
 from server.model.user import User
 from server.model.follow import Follow
 from server.view import unicode_safe_json_dumps
 from server.extensions import db
 
 
+class Follower(Resource):
+
+    @swag_from(FOLLOWER_GET)
+    def get(self, userId):
+        # 자신을 팔로우하고 있는 팔로워의 목록을 확인
+        pass
+
+
 class Following(Resource):
 
-    @swag_from(FOLLOW_GET)
+    @swag_from(FOLLOWING_GET)
     def get(self, userId):
 
         # 만약 userId 가 있고 일치한 회원정보가 있을 경우 해당 회원의 팔로워 반환
@@ -30,7 +38,8 @@ class Following(Resource):
         else:
             return {"status": "invalid authentication"}, 401
 
-    @swag_from(FOLLOW_POST)
+    @jwt_required
+    @swag_from(FOLLOWING_PATCH)
     def patch(self, userId):
         be_followed = request.json['userId']
         user_query = User.query.filter(User.id == userId).first()
@@ -50,12 +59,13 @@ class Following(Resource):
             db.session.commit()
             return {"status": "It was succeed that adding follow info"}, 201
 
-    @swag_from(FOLLOW_DELETE)
+    @jwt_required
+    @swag_from(FOLLOWING_DELETE)
     def delete(self, userId):
         be_deleted = request.json['userId']
         user_query = User.query.filter(User.id == userId).first()
         passive_user_query = User.query.filter(User.id == be_deleted).first()
-        
+
         if userId == be_deleted:
             return unicode_safe_json_dumps({"status": "잘못된 요청입니다. 본인 계정을 팔로우 취소할 수 없습니다."}, 403)
 
@@ -74,15 +84,3 @@ class Following(Resource):
 
         else:
             return {"status": "invalid authentication"}, 401
-
-
-class Follower(Resource):
-
-    def get(self, userId):
-        pass
-
-    def patch(self, userId):
-        pass
-
-    def delete(self, userId):
-        pass
