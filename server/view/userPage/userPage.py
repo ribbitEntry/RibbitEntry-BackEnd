@@ -1,6 +1,5 @@
 from flasgger import swag_from
 from flask_restful import Resource
-from flask import jsonify
 
 from server.view import unicode_safe_json_dumps
 from server.model.user import User
@@ -14,11 +13,7 @@ class UserPage(Resource):
     def get(self, user):
 
         user_info = User.query.filter(User.id == user).first()
-        post_info = Post.query.filter(Post.user == user).all()
-
-        print("----------")
-        print(post_info)
-        print("-----------")
+        post_info = Post.query.filter(Post.user == user).all().order_by(Post.date)
 
         user_info_ = {
             "nickname": user_info.nickname,
