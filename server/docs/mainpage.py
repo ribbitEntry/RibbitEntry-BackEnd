@@ -37,10 +37,11 @@ MAIN_PAGE_GET = {
                     "follower_num": "0"
                 },
                 "post": {
-                    "title": "서버",
                     "content": "리빗엔트리",
                     "image": "link",
                     "user": "kim",
+                    "nickname": "바보",
+                    "proimg": "이미지",
                     "date": "00:00:00",
                     "like": "50"
                 }

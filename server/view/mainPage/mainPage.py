@@ -42,6 +42,8 @@ class MainPage(Resource):
                                "content": posts.content,
                                "image": posts.image,
                                "user": posts.user,
+                               "proimg": posts.user.proimg,
+                               "nickname": posts.user.nickname,
                                "date": str(posts.date),
                                "like": posts.like,
                            } for posts in post_info]
