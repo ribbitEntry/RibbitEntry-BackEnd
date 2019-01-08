@@ -35,6 +35,7 @@ class UserPage(Resource):
             return unicode_safe_json_dumps({
                 "user_info": user_info_,
                 "post": [{
+                    "id": posts.post_id,
                     "content": posts.content,
                     "image": posts.image,
                     "user": posts.user,

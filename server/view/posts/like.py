@@ -3,7 +3,7 @@ from flask_restful import Resource
 from flask_jwt_extended import jwt_required
 
 from server.model.post import Post
-from server.docs.like import LIKE_PATCH
+from server.docs.posts.like import LIKE_PATCH
 from server.view import session
 
 

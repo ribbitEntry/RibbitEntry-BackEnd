@@ -39,6 +39,7 @@ class MainPage(Resource):
                        "user_info": user_info_,
                        "post": [
                            {
+                               "id": posts.post_id,
                                "content": posts.content,
                                "image": posts.image,
                                "user": posts.user,
