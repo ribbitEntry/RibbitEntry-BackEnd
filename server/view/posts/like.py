@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.model.user import User
 from server.model.post import Post
 from server.docs.posts.like import LIKE_PATCH
-from server.view import session
+from server.extensions import db
 
 
 class Like(Resource):
@@ -17,7 +17,7 @@ class Like(Resource):
 
         if valid_user and post:
             post.like += 1
-            session.commit()
+            db.session.commit()
             return {"like": post.like}, 200
 
         elif not valid_user:
