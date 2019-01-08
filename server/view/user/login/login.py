@@ -15,9 +15,10 @@ class Login(Resource):
         payload = request.json
         userId = payload['userId']
         password = payload['password']
+        valid_user = User.query.filter(User.id == userId).first()
 
         if userId and password:
-            if User.query.filter(User.id == userId).first():
+            if valid_user and valid_user.pw == password:
                 return {
                            'access_token': create_access_token(identity=userId),
                            'refresh_token': create_refresh_token(identity=userId),
