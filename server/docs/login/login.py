@@ -1,4 +1,4 @@
-from . import param
+from docs import param
 
 LOGIN_POST = {
     'tags': ['login'],

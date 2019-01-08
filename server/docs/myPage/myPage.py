@@ -1,4 +1,4 @@
-from . import param
+from docs import param
 
 MY_PAGE_POST = {
     'tags': ['my-page'],

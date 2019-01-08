@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flasgger import swag_from
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from server.docs.mainpage import MAIN_PAGE_GET
+from docs.mainPage.mainpage import MAIN_PAGE_GET
 from server.model.post import Post
 from server.model.user import User
 from server.model.follow import Follow

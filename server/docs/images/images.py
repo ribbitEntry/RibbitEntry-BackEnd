@@ -1,4 +1,4 @@
-from . import param
+from docs import param
 
 IMAGES_GET = {
     'tags': ['images'],

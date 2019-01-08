@@ -1,9 +1,9 @@
 from flask_restful import Resource
 from flask import request
 from flasgger import swag_from
-from flask_jwt_extended import get_jwt_identity, jwt_required
+from flask_jwt_extended import jwt_required
 
-from server.docs.color import COLOR_POST
+from docs.myPage.color import COLOR_POST
 from server.extensions import db
 from server.model.user import User
 from server.view import unicode_safe_json_dumps

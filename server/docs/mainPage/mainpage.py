@@ -1,4 +1,4 @@
-from . import param
+from docs import param
 
 MAIN_PAGE_GET = {
     'tags': ['main-page'],

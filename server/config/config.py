@@ -71,8 +71,8 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'NEEDFORSPEED')
 
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'GAE1GUL')
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(days=1)
-    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=6)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=12)
 
     # FILE UPLOAD CONFIGS(MUST BE CHANGED!)
     STATIC_DIRECTORY = ''

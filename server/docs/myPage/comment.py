@@ -1,4 +1,4 @@
-from . import param, jwt_param
+from docs import param, jwt_param
 
 COMMENT_POST = {
     'tags': ['my-page'],

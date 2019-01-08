@@ -1,4 +1,4 @@
-from . import param
+from docs import param
 
 POSTS_POST = {
     'tags': ['posts'],
