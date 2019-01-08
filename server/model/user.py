@@ -8,8 +8,8 @@ class User(db.Model):
     __table_args__ = {'mysql_collate': 'utf8_general_ci'}
 
     id = Column(db.String(50), primary_key=True)
-    pw = Column(db.String(50), nullable=False)
-    nickname = Column(db.String(50), nullable=False)
+    pw = Column(db.String(50))
+    nickname = Column(db.String(50))
 
     theme_color = Column(db.String(20), default='#F58EA8')
     proimg = Column(db.String(100), default='')

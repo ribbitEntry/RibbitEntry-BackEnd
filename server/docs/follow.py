@@ -1,4 +1,4 @@
-from . import param
+from . import param, jwt_param
 
 FOLLOWER_GET = {
     'tags': ['follow'],
@@ -37,14 +37,8 @@ FOLLOWING_GET = {
 FOLLOWING_PATCH = {
     'tags': ['follow'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('userId', '팔로우할 유저의 이메일(아이디)')
+        jwt_param(),
+        param('userId', '팔로우할 유저의 이메일(아이디)', 'json', 'str')
     ],
     'responses': {
         '201': {
@@ -62,14 +56,8 @@ FOLLOWING_PATCH = {
 FOLLOWING_DELETE = {
     'tags': ['follow'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('userId', '팔로우 취소할 유저의 이메일(아이디)')
+        jwt_param(),
+        param('userId', '팔로우 취소할 유저의 이메일(아이디)', 'json', 'str')
     ],
     'responses': {
         '200': {

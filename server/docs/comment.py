@@ -1,16 +1,10 @@
-from . import param
+from . import param, jwt_param
 
 COMMENT_POST = {
     'tags': ['my-page'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('content', '내용')
+        jwt_param(),
+        param('content', '내용', 'json', 'str')
     ],
     'responses': {
         '201': {
