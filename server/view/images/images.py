@@ -15,15 +15,15 @@ class GETImages(Resource):
 
         if args.get('postId') and args.get('fileId'):
             userId = Post.query.filter(Post.post_id == args.get('postId')).first().user
-            folder = current_app.config['UPLOAD_FOLDER'] + '/' + str(userId) + '/' + args.get('postId')
+            folder = current_app.config['UPLOAD_FOLDER_PATH'] + '/' + str(userId) + '/' + args.get('postId')
             file_name = args.get('fileId')
 
         elif args.get('profile'):
-            folder = current_app.config['UPLOAD_FOLDER'] + '/' + str(args.get('userId')) + '/profile'
+            folder = current_app.config['UPLOAD_FOLDER_PATH'] + '/' + str(args.get('userId')) + '/profile'
             file_name = args.get('profile')
 
         elif args.get('background'):
-            folder = current_app.config['UPLOAD_FOLDER'] + '/' + str(args.get('userId')) + '/background'
+            folder = current_app.config['UPLOAD_FOLDER_PATH'] + '/' + str(args.get('userId')) + '/background'
             file_name = args.get('background')
 
         return send_from_directory(folder, file_name)

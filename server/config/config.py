@@ -76,4 +76,7 @@ class Config(object):
 
     # FILE UPLOAD CONFIGS(MUST BE CHANGED!)
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'resource')
+
+    # ONLY FOR UBUNTU
+    UPLOAD_FOLDER_PATH = '/home/ubuntu/RibbitEntry-BackEnd/resource'
     ALLOWED_EXTENSIONS = ('jpg', 'jpeg', 'bmp', 'gif', 'png')
