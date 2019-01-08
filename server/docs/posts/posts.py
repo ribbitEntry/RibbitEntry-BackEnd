@@ -1,4 +1,4 @@
-from docs import param
+from server.docs import param
 
 POSTS_POST = {
     'tags': ['posts'],

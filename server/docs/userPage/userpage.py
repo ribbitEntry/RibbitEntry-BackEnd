@@ -1,4 +1,4 @@
-from docs import param
+from server.docs import param
 
 USER_PAGE_GET = {
     'tags': ['user-page'],

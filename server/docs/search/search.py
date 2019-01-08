@@ -1,4 +1,4 @@
-from docs import param
+from server.docs import param
 
 SEARCH_GET = {
     'tags': ['search'],
