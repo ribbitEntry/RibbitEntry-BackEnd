@@ -1,5 +1,5 @@
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask import request
+from flask import request, current_app
 from flasgger import swag_from
 from flask_restful import Resource
 
@@ -36,6 +36,8 @@ class MyPagePatch(Resource):
             if profile_image or background_image or nickname or introduction:
 
                 if profile_image:
+                    before_image = user.proimg
+                    path = current_app.config['UPLOAD_FOLDER_PATH'] + '/'
                     user.proimg = upload_files(profile_image, userId, various='profile')
 
                 if background_image:

@@ -57,16 +57,18 @@ class Following(Resource):
     @jwt_required
     @swag_from(FOLLOWING_PATCH)
     def patch(self, userId):
-        be_followed = request.json['userId']
+        own_user = get_jwt_identity()
+        be_followed = userId
+
         user_query = User.query.filter(User.id == userId).first()
         passive_user_query = User.query.filter(User.id == be_followed).first()
 
-        if userId and not user_query:
+        if own_user and not user_query:
             return {"status": "invalid authentication"}, 401
-        elif userId and user_query and not passive_user_query:
+        elif own_user and user_query and not passive_user_query:
             return {"status": "invalid passive user info"}, 400
-        elif userId and user_query and passive_user_query:
-            be_followed_set = Follow(follow=userId, follower=be_followed)
+        elif own_user and user_query and passive_user_query:
+            be_followed_set = Follow(follow=own_user, follower=be_followed)
             db.session.add(be_followed_set)
 
             user_query.follow_num += 1
