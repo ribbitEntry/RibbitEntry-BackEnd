@@ -1,15 +1,15 @@
-from flask_restful import Resource
+from flask import request, jsonify, current_app
 from flasgger import swag_from
-from flask import request
 from datetime import datetime
+from flask_restful import Resource
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from server.docs.posts.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
-from server.extensions import db
-from server.model.user import User
-from server.model.post import Post
 from server.view import unicode_safe_json_dumps, upload_files
 from server.view.posts import detect_and_set_file
+from server.model.user import User
+from server.model.post import Post
+from server.extensions import db
+from server.docs.posts.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
 
 
 # postId를 불러오지 않는 클래스 선언
@@ -87,12 +87,17 @@ class PostElement(Resource):
     def delete(self, postId):
 
         # 계정 확인 커리문 필요(본인의 게시물만 삭제 가능)
-        post_id = request.json['post_id']
-        post = Post.query.filter(Post.post_id == post_id).first()
+        userId = get_jwt_identity()
+        post = Post.query.filter(Post.post_id == postId).first()
 
-        if post.user == get_jwt_identity():
-            post.delete()
-            db.session.commit()
-            return unicode_safe_json_dumps({'status': '글이 삭제되었습니다.'}, 200)
+        if User.query.filter(User.id == userId).first():
+            if post.user == userId:
+                post.delete()
+                db.session.commit()
+                path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/{}'.format(userId, postId)
+
+                return jsonify({'status': '글이 삭제되었습니다.'}), 200
+            else:
+                return jsonify({'status': 'invalid post info'}), 404
         else:
-            unicode_safe_json_dumps({'status': '없는 글입니다.'}, 400)
+            return jsonify({'status': '없는 글입니다.'}), 400

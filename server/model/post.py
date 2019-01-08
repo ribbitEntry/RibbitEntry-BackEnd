@@ -13,6 +13,6 @@ class Post(db.Model):
     date = Column(db.DateTime, default=datetime.now)
 
     content = Column(db.String(100))
-    image = Column(db.VARCHAR(2048), default='  ')
+    image = Column(db.VARCHAR(2048), default='')
 
     like = Column(db.Integer, default=0)
