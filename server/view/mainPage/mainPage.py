@@ -43,7 +43,9 @@ class MainPage(Resource):
                                "content": posts.content,
                                "image": posts.image,
                                "user": posts.user,
+                               "nickname": User.query.filter(User.id == user_id).first().nickname,
+                               "profile_image": User.query.filter(User.id == user_id).first().proimg,
                                "date": str(posts.date),
-                               "like": posts.like,
+                               "like": posts.like
                            } for posts in post_info]
                    }, 200
