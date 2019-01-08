@@ -3,7 +3,7 @@ from flask import request
 from flasgger import swag_from
 from flask_jwt_extended import jwt_required
 
-from docs.myPage.color import COLOR_POST
+from server.docs.myPage.color import COLOR_POST
 from server.extensions import db
 from server.model.user import User
 from server.view import unicode_safe_json_dumps

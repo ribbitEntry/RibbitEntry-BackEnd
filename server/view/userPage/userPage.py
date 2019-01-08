@@ -4,7 +4,7 @@ from flask_restful import Resource
 from server.view import unicode_safe_json_dumps
 from server.model.user import User
 from server.model.post import Post
-from docs.userPage.userpage import USER_PAGE_GET
+from server.docs.userPage.userpage import USER_PAGE_GET
 
 
 class UserPage(Resource):
