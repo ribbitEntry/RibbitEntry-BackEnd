@@ -12,8 +12,7 @@ class Post(db.Model):
     user = Column(db.String(50), ForeignKey("user.id"))
     date = Column(db.DateTime, default=datetime.now)
 
-    # TODO VARCHAR 적용하기
-    content = Column(db.String(100), nullable=False)
-    image = Column(db.String(2048), nullable=True)
+    content = Column(db.String(100))
+    image = Column(db.VARCHAR(2048), default='  ')
 
     like = Column(db.Integer, default=0)
