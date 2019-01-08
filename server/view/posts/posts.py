@@ -1,3 +1,5 @@
+import os
+
 from flask import request, jsonify, current_app
 from flasgger import swag_from
 from datetime import datetime
@@ -94,8 +96,9 @@ class PostElement(Resource):
             if post.user == userId:
                 post.delete()
                 db.session.commit()
-                path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/{}'.format(userId, postId)
-
+                path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/{}/'.format(userId, postId)
+                if os.path.exists(path):
+                    os.rmdir(path)
                 return jsonify({'status': '글이 삭제되었습니다.'}), 200
             else:
                 return jsonify({'status': 'invalid post info'}), 404
