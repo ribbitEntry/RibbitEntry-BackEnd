@@ -4,7 +4,7 @@ from flask import request
 from datetime import datetime
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from server.docs.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
+from server.docs.posts.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
 from server.extensions import db
 from server.model.user import User
 from server.model.post import Post

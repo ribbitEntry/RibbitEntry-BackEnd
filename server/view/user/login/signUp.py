@@ -3,7 +3,7 @@ from flasgger import swag_from
 from flask_restful import Resource
 
 from server.extensions import db
-from server.docs.login import SIGNUP_POST
+from server.docs.login.login import SIGNUP_POST
 from server.model.user import User
 # from server.view.user.login import validate_email
 
