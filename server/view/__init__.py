@@ -78,6 +78,10 @@ def allowed_file(filename):
            filename.split('.', 1)[1].lower() in current_app.config['ALLOWED_EXTENSIONS']
 
 
+def upload_file(file, path):
+    pass
+
+
 def upload_files(files, userId, postId=None, various=None):
     url_list = []
     directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId)

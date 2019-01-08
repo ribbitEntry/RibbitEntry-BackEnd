@@ -1,16 +1,10 @@
-from . import param
+from . import param, jwt_param
 
 COLOR_POST = {
     'tags': ['my-page'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('color', '변경할 색')
+        jwt_param(),
+        param('color', '변경할 색', 'json', 'str')
     ],
     'responses': {
         '200': {

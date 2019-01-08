@@ -1,4 +1,4 @@
-from . import param
+from . import param, jwt_param
 
 FOLLOWER_GET = {
     'tags': ['follow'],
@@ -6,14 +6,28 @@ FOLLOWER_GET = {
         '200': {
             'description': "팔로우 정보 반환 성공",
             'example': {
-                'now_follower': [
-                    '김재훈', '김준우', '신은주', '이채은'
+                "now_follower": [
+                    {
+                        "userId": "by09115",
+                        "nickname": "덩어리덩어리",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=by09115&profile=WIN_20180923.jpg"
+                    },
+                    {
+                        "userId": "sineunjoo",
+                        "nickname": "개구리지롱",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=sineunjoo&profile=Gaegul.jpg"
+                    },
+                    {
+                        "userId": "DSM2018",
+                        "nickname": "대마대마",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=DSM2018&profile=DSM2018.jpg"
+                    }
                 ]
             }
-        },
-        '404': {
-            'description': "없는 계정입니다."
         }
+    },
+    '404': {
+        'description': "없는 계정입니다."
     }
 }
 
@@ -24,7 +38,21 @@ FOLLOWING_GET = {
             'description': "팔로우 정보 반환 성공",
             'example': {
                 'now_following': [
-                    '김재훈', '김준우', '신은주', '이채은'
+                    {
+                        "userId": "김재훈",
+                        "nickname": "덩어리덩어리",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=by09115&profile=WIN_20180923.jpg"
+                    },
+                    {
+                        "userId": "신은주",
+                        "nickname": "개구리지롱",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=sineunjoo&profile=Gaegul.jpg"
+                    },
+                    {
+                        "userId": "김준우",
+                        "nickname": "대마대마",
+                        "profile_image": "http://ribbit.jaehoon.kim:5000/api/images?userId=DSM2018&profile=DSM2018.jpg"
+                    }
                 ]
             }
         },
@@ -37,14 +65,8 @@ FOLLOWING_GET = {
 FOLLOWING_PATCH = {
     'tags': ['follow'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('userId', '팔로우할 유저의 이메일(아이디)')
+        jwt_param(),
+        param('userId', '팔로우할 유저의 이메일(아이디)', 'json', 'str')
     ],
     'responses': {
         '201': {
@@ -62,14 +84,8 @@ FOLLOWING_PATCH = {
 FOLLOWING_DELETE = {
     'tags': ['follow'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        },
-        param('userId', '팔로우 취소할 유저의 이메일(아이디)')
+        jwt_param(),
+        param('userId', '팔로우 취소할 유저의 이메일(아이디)', 'json', 'str')
     ],
     'responses': {
         '200': {
