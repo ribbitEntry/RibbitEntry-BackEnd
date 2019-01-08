@@ -87,13 +87,13 @@ def upload_files(files, userId, postId=None, various=None):
     directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId)
 
     if files and userId:
-        if not os.path.isdir(directory):
+        if not os.path.exists(directory):
             os.makedirs(directory)
 
-        if postId and not os.path.isdir(directory + '/' + str(postId)):
+        if postId and not os.path.exists(directory + '/' + str(postId)):
             os.makedirs(directory + '/' + str(postId))
 
-        if not postId and various and not os.path.isdir(directory + '/' + str(various)):
+        if not postId and various and not os.path.exists(directory + '/' + str(various)):
             os.mkdir(directory + '/' + str(various))
 
     if not postId and various and files != list and allowed_file(files.filename):
