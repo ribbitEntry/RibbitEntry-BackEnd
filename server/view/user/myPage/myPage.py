@@ -1,11 +1,11 @@
 import os
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask import request, current_app
+from flask import request, current_app, jsonify
 from flasgger import swag_from
 from flask_restful import Resource
 
 from server.model.user import User
-from server.view import unicode_safe_json_dumps, upload_files
+from server.view import upload_files
 from server.extensions import db
 from server.docs.myPage.myPage import MY_PAGE_POST
 
@@ -55,7 +55,7 @@ class MyPagePatch(Resource):
                     user.introduction = introduction
 
                 db.session.commit()
-                return unicode_safe_json_dumps({"status": "프로필 정보 변경 성공"}, 201)
+                return jsonify({"status": "프로필 정보 변경 성공"}, 201)
 
             else:
                 return {"status": "argument required"}, 406

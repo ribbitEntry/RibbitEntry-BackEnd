@@ -6,8 +6,7 @@ from datetime import datetime
 from flask_restful import Resource
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
-from server.view import unicode_safe_json_dumps, upload_files
-from server.view.posts import detect_and_set_file
+from server.view import upload_files
 from server.model.user import User
 from server.model.post import Post
 from server.extensions import db
@@ -67,13 +66,13 @@ class Posts(Resource):
                     before_post.image = ','.join(urls)
                     db.session.commit()
 
-                return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
+                return jsonify({'status': '글 작성 완료'}, 201)
 
             else:
-                return unicode_safe_json_dumps({'status': '내용을 작성해주세요'}, 400)
+                return jsonify({'status': '내용을 작성해주세요'}, 400)
 
         else:
-            return unicode_safe_json_dumps({'status': '일치하지 않는 인증 정보입니다.'}, 401)
+            return jsonify({'status': '일치하지 않는 인증 정보입니다.'}, 401)
 
 
 # postId를 받아오는 GET, DELETE 메소드를 위한 클래스 선언
