@@ -35,7 +35,7 @@ class MainPage(Resource):
             return jsonify({"user_info": user_info_}, 200)
 
         elif user_info and post_info:
-            return jsonify({
+            return {
                        "user_info": user_info_,
                        "post": [
                            {
@@ -48,4 +48,4 @@ class MainPage(Resource):
                                "date": str(posts.date),
                                "like": posts.like
                            } for posts in post_info]
-                   }, 200)
+                   }, 200
