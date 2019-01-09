@@ -60,7 +60,7 @@ class Following(Resource):
         own_user = get_jwt_identity()
         be_followed = userId
 
-        user_query = User.query.filter(User.id == userId).first()
+        user_query = User.query.filter(User.id == own_user).first()
         passive_user_query = User.query.filter(User.id == be_followed).first()
 
         if own_user and not user_query:
@@ -71,7 +71,7 @@ class Following(Resource):
 
         elif own_user and user_query and passive_user_query:
 
-            if not Follow.query.filter(Follow.follow == own_user, Follow.follower == be_followed):
+            if not Follow.query.filter(Follow.follow == own_user, Follow.follower == be_followed).first():
                 be_followed_set = Follow(follow=own_user, follower=be_followed)
                 db.session.add(be_followed_set)
                 user_query.follow_num += 1
