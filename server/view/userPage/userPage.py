@@ -1,7 +1,6 @@
 from flasgger import swag_from
 from flask_restful import Resource
 
-from server.view import unicode_safe_json_dumps
 from server.model.user import User
 from server.model.post import Post
 from server.docs.userPage.userpage import USER_PAGE_GET
@@ -29,10 +28,10 @@ class UserPage(Resource):
             return {"status": "invalid authentication"}, 401
 
         elif user_info and not post_info:
-            return unicode_safe_json_dumps({"user_info": user_info_}), 200
+            return {"user_info": user_info_}, 200
 
         elif user_info and post_info:
-            return unicode_safe_json_dumps({
+            return {
                 "user_info": user_info_,
                 "post": [{
                     "id": posts.post_id,
@@ -42,4 +41,4 @@ class UserPage(Resource):
                     "date": str(posts.date),
                     "like": posts.like
                 } for posts in post_info]
-            }, 200)
+            }, 200
