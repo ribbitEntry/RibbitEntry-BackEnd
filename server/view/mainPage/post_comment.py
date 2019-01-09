@@ -1,8 +1,9 @@
 from flask_restful import Resource
-from flask import request, jsonify
+from flask import request
 
 from server.model.post import Post
 from server.model.comment import Comment
+from server.view import unicode_safe_json_dumps
 
 
 class PostCommentView(Resource):
@@ -21,7 +22,7 @@ class PostCommentView(Resource):
         }
 
         if post_num:
-            return jsonify({
+            return unicode_safe_json_dumps({
                 'post_info': post_info,
                 'comment': [
                     {

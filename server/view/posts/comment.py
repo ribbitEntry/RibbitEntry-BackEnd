@@ -1,11 +1,12 @@
 from flask_restful import Resource
-from flask import request, jsonify
+from flask import request
 from flasgger import swag_from
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from server.extensions import db
 from server.model.comment import Comment
 from server.docs.myPage.comment import COMMENT_POST
+from server.view import unicode_safe_json_dumps
 
 
 class PostComment(Resource):
@@ -19,6 +20,6 @@ class PostComment(Resource):
             comment = Comment(content=content, user=get_jwt_identity(), post_id=postId)
             db.session.add(comment)
             db.session.commit()
-            return jsonify({'status': '글 작성 완료.'}, 201)
+            return unicode_safe_json_dumps({'status': '글 작성 완료.'}, 201)
         else:
-            return jsonify({'status': '내용이 없습니다.'}, 400)
+            return unicode_safe_json_dumps({'status': '내용이 없습니다.'}, 400)

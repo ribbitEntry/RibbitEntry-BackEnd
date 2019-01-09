@@ -1,6 +1,6 @@
 import os
 
-from flask import request, jsonify, current_app
+from flask import request, current_app
 from flasgger import swag_from
 from datetime import datetime
 from flask_restful import Resource
@@ -11,6 +11,7 @@ from server.model.user import User
 from server.model.post import Post
 from server.extensions import db
 from server.docs.posts.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
+from server.view import unicode_safe_json_dumps
 
 
 # postId를 불러오지 않는 클래스 선언
@@ -66,13 +67,13 @@ class Posts(Resource):
                     before_post.image = ','.join(urls)
                     db.session.commit()
 
-                return jsonify({'status': '글 작성 완료'}, 201)
+                return unicode_safe_json_dumps({'status': '글 작성 완료'}, 201)
 
             else:
-                return jsonify({'status': '내용을 작성해주세요'}, 400)
+                return unicode_safe_json_dumps({'status': '내용을 작성해주세요'}, 400)
 
         else:
-            return jsonify({'status': '일치하지 않는 인증 정보입니다.'}, 401)
+            return unicode_safe_json_dumps({'status': '일치하지 않는 인증 정보입니다.'}, 401)
 
 
 # postId를 받아오는 GET, DELETE 메소드를 위한 클래스 선언
@@ -98,8 +99,8 @@ class PostElement(Resource):
                 path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/{}/'.format(userId, postId)
                 if os.path.exists(path):
                     os.rmdir(path)
-                return jsonify({'status': '글이 삭제되었습니다.'}), 200
+                return unicode_safe_json_dumps({'status': '글이 삭제되었습니다.'}), 200
             else:
-                return jsonify({'status': 'invalid post info'}), 404
+                return unicode_safe_json_dumps({'status': 'invalid post info'}), 404
         else:
-            return jsonify({'status': '없는 글입니다.'}), 400
+            return unicode_safe_json_dumps({'status': '없는 글입니다.'}), 400

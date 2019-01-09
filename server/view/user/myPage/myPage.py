@@ -1,6 +1,6 @@
 import os
 from flask_jwt_extended import get_jwt_identity, jwt_required
-from flask import request, current_app, jsonify
+from flask import request, current_app
 from flasgger import swag_from
 from flask_restful import Resource
 

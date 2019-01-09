@@ -1,9 +1,10 @@
 from flask_restful import Resource
 from flasgger import swag_from
-from flask import request, jsonify
+from flask import request
 
 from server.docs.search.search import SEARCH_GET
 from server.model.user import User
+from server.view import unicode_safe_json_dumps
 
 
 class Search(Resource):
@@ -14,8 +15,7 @@ class Search(Resource):
         user_info = User.query.filter(User.nickname == search_word).all()
 
         if user_info:
-            return jsonify(
-                [
+            return unicode_safe_json_dumps([
                     {
                         "nickname": user.nickname,
                         "profile_image": user.proimg,
@@ -23,4 +23,4 @@ class Search(Resource):
                     } for user in user_info], 200)
 
         else:
-            return jsonify({"status": "없는 유저입니다."}, 404)
+            return {"status": "없는 유저입니다."}, 404
