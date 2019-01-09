@@ -84,7 +84,7 @@ def upload_file(file, path):
 
 def upload_files(files, userId, postId=None, various=None):
     url_list = []
-    directory = str(current_app.config['UPLOAD_FOLDER'] + '/' + userId)
+    directory = str(current_app.config['UPLOAD_FOLDER_PATH'] + '/' + userId)
 
     if files and userId:
         if not os.path.exists(directory):
