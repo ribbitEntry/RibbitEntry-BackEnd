@@ -1,3 +1,4 @@
+import os
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask import request, current_app
 from flasgger import swag_from
@@ -14,7 +15,7 @@ class MyPagePatch(Resource):
 
     @swag_from(MY_PAGE_POST)
     @jwt_required
-    def post(self):
+    def patch(self):
 
         userId = get_jwt_identity()
         profile_image = request.files.get('profile_image')
@@ -36,11 +37,15 @@ class MyPagePatch(Resource):
             if profile_image or background_image or nickname or introduction:
 
                 if profile_image:
-                    before_image = user.proimg
-                    path = current_app.config['UPLOAD_FOLDER_PATH'] + '/'
+                    path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/profile/{}'.format(userId, user.proimg)
+                    if os.path.isfile(path):
+                        os.remove(path)
                     user.proimg = upload_files(profile_image, userId, various='profile')
 
                 if background_image:
+                    path = current_app.config['UPLOAD_FOLDER_PATH'] + '/{}/background/{}'.format(userId, user.backimg)
+                    if os.path.isfile(path):
+                        os.remove(path)
                     user.backimg = upload_files(background_image, userId, various='background')
 
                 if nickname:
