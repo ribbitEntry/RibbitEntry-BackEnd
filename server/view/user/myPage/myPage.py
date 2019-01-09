@@ -15,9 +15,9 @@ class MyPagePatch(Resource):
 
     @swag_from(MY_PAGE_POST)
     @jwt_required
-    def patch(self):
+    def patch(self, userId):
 
-        userId = get_jwt_identity()
+        user_id = get_jwt_identity()
         profile_image = request.files.get('profile_image')
         background_image = request.files.get('background_image')
         try:
@@ -30,9 +30,9 @@ class MyPagePatch(Resource):
         except:
             introduction = None
 
-        user = User.query.filter(User.id == userId).first()
+        user = User.query.filter(User.id == user_id).first()
 
-        if userId and user:
+        if user_id and user and user_id == userId:
 
             if profile_image or background_image or nickname or introduction:
 
