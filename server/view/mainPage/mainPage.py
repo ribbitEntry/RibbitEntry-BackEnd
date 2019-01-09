@@ -32,7 +32,7 @@ class MainPage(Resource):
             return {"status": "없는 유저입니다."}, 401
 
         elif user_info and not post_info:
-            return jsonify({"user_info": user_info_}, 200)
+            return {"user_info": user_info_}, 200
 
         elif user_info and post_info:
             return {
