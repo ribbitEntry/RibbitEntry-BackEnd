@@ -65,16 +65,18 @@ class Following(Resource):
 
         if own_user and not user_query:
             return {"status": "invalid authentication"}, 401
+
         elif own_user and user_query and not passive_user_query:
             return {"status": "invalid passive user info"}, 400
+
         elif own_user and user_query and passive_user_query:
-            be_followed_set = Follow(follow=own_user, follower=be_followed)
-            db.session.add(be_followed_set)
 
-            user_query.follow_num += 1
-            passive_user_query.follower_num += 1
-
-            db.session.commit()
+            if not Follow.query.filter(Follow.follow == own_user, Follow.follower == be_followed):
+                be_followed_set = Follow(follow=own_user, follower=be_followed)
+                db.session.add(be_followed_set)
+                user_query.follow_num += 1
+                passive_user_query.follower_num += 1
+                db.session.commit()
             return {"status": "It was succeed that adding follow info"}, 201
 
     @jwt_required
