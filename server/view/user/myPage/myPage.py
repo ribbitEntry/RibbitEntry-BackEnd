@@ -55,7 +55,7 @@ class MyPagePatch(Resource):
                     user.introduction = introduction
 
                 db.session.commit()
-                return jsonify({"status": "프로필 정보 변경 성공"}), 201
+                return {"status": "success"}, 201
 
             else:
                 return {"status": "argument required"}, 406
