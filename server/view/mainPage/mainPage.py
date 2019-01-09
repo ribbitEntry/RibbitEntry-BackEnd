@@ -1,12 +1,12 @@
 from flask_restful import Resource
 from flasgger import swag_from
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import jsonify
 
 from server.docs.mainPage.mainpage import MAIN_PAGE_GET
 from server.model.post import Post
 from server.model.user import User
 from server.model.follow import Follow
-from server.view import unicode_safe_json_dumps
 
 
 class MainPage(Resource):
@@ -32,10 +32,10 @@ class MainPage(Resource):
             return {"status": "없는 유저입니다."}, 401
 
         elif user_info and not post_info:
-            return unicode_safe_json_dumps({"user_info": user_info_}, 200)
+            return jsonify({"user_info": user_info_}, 200)
 
         elif user_info and post_info:
-            return {
+            return jsonify({
                        "user_info": user_info_,
                        "post": [
                            {
@@ -48,4 +48,4 @@ class MainPage(Resource):
                                "date": str(posts.date),
                                "like": posts.like
                            } for posts in post_info]
-                   }, 200
+                   }, 200)

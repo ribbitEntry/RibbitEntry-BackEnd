@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from flasgger import swag_from
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -6,7 +6,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from server.docs.follow.follow import FOLLOWER_GET, FOLLOWING_GET, FOLLOWING_PATCH, FOLLOWING_DELETE
 from server.model.user import User
 from server.model.follow import Follow
-from server.view import unicode_safe_json_dumps
 from server.extensions import db
 
 
@@ -17,7 +16,7 @@ class Follower(Resource):
         # 자신을 팔로우하고 있는 팔로워의 목록을 확인
         if userId and User.query.filter(User.id == userId).first():
             follower = Follow.query.filter(Follow.follower == userId).all()
-            return unicode_safe_json_dumps(
+            return jsonify(
                 {
                     "now_follower": [
                         {
@@ -39,7 +38,7 @@ class Following(Resource):
         if userId and User.query.filter(User.id == userId).first():
             following = Follow.query.filter(Follow.follow == userId).all()
 
-            return unicode_safe_json_dumps(
+            return jsonify(
                 {
                     "now_following": [
                         {
@@ -87,10 +86,10 @@ class Following(Resource):
         passive_user_query = User.query.filter(User.id == be_deleted).first()
 
         if userId == be_deleted:
-            return unicode_safe_json_dumps({"status": "잘못된 요청입니다. 본인 계정을 팔로우 취소할 수 없습니다."}, 403)
+            return jsonify({"status": "잘못된 요청입니다. 본인 계정을 팔로우 취소할 수 없습니다."}, 403)
 
         elif userId == Follow.query.filter(Follow.follower == userId).first():
-            return unicode_safe_json_dumps({"status": "수행할 수 없는 명령입니다.(피팔로워는 상대방의 팔로우에 관여할 수 없음)"}, 403)
+            return jsonify({"status": "수행할 수 없는 명령입니다.(피팔로워는 상대방의 팔로우에 관여할 수 없음)"}, 403)
 
         elif userId and User.query.filter(User.id == userId).first():
             be_deleted_info = Follow.query.filter(Follow.follow == userId,
