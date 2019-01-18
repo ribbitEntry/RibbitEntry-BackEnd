@@ -1,10 +1,8 @@
-from server.docs import param
+from server.docs import jwt_param
 
 MAIN_PAGE_GET = {
     'tags': ['main-page'],
-    'parameters': [
-        param('Authorization', '헤더로 jwt 받아오기', 'header', 'str')
-    ],
+    'parameters': [jwt_param()],
     'responses': {
         '200': {
             'description': '메인 포스트가 없는 경우 유저 정보만 반환합니다.',
