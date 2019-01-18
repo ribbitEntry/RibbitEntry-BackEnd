@@ -3,13 +3,7 @@ from server.docs import param
 MAIN_PAGE_GET = {
     'tags': ['main-page'],
     'parameters': [
-        {
-            'name': 'Authorization',
-            'description': "헤더로 jwt 받아오기",
-            'in': 'header',
-            'type': 'str',
-            'required': True
-        }
+        param('Authorization', '헤더로 jwt 받아오기', 'header', 'str')
     ],
     'responses': {
         '200': {

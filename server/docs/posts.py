@@ -91,3 +91,34 @@ POST_ELEMENT_DELETE = {
         }
     }
 }
+
+LIKE_PATCH = {
+    'tags': ['posts'],
+    'response' :  {
+        '201': {
+            'description': "좋아요 성공",
+            "example": {'like': "좋아요 갯수"}
+        },
+        '400': {
+            'description': "좋아요 실패, 글이 없는 글이에요."
+        }
+    }
+}
+
+from server.docs import param, jwt_param
+
+COMMENT_POST = {
+    'tags': ['my-page'],
+    'parameters': [
+        jwt_param(),
+        param('content', '내용', 'json', 'str')
+    ],
+    'responses': {
+        '201': {
+            'description': "댓글 작성 완료"
+        },
+        '400': {
+            'description': "JWT 인증에 실패하였거나 내용이 없습니다."
+        }
+    }
+}

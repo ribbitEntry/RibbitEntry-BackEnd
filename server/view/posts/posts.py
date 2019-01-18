@@ -10,7 +10,7 @@ from server.view import upload_files
 from server.model.user import User
 from server.model.post import Post
 from server.extensions import db
-from server.docs.posts.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
+from server.docs.posts import POSTS_POST, POST_ELEMENT_DELETE, POST_ELEMENT_GET
 from server.view import unicode_safe_json_dumps
 
 

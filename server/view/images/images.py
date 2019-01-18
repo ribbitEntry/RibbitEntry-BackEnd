@@ -3,7 +3,7 @@ from flask_restful import Resource
 from flasgger import swag_from
 
 from server.model.post import Post
-from server.docs.images.images import IMAGES_GET
+from server.docs.images import IMAGES_GET
 
 
 class GETImages(Resource):
