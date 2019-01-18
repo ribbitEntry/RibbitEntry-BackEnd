@@ -2,6 +2,7 @@ import os
 from datetime import timedelta
 
 
+# TODO Config 클래스를 상속하는 타 클래스를 만들어 실행 환경 별 설정을 달리함
 class Config(object):
     SWAGGER = {
         'title': 'RibbitEntry',
@@ -17,6 +18,7 @@ class Config(object):
         'basePath': '/api/',
     }
 
+    # TODO 스웨거 템플릿 태그 설정 삭제
     SWAGGER_TEMPLATE = {
         'schemes': [
             'http'
@@ -78,5 +80,6 @@ class Config(object):
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'resource')
 
     # ONLY FOR UBUNTU
+    # TODO 운영체제별 의존성 제거 및 상대 경로로 변경
     UPLOAD_FOLDER_PATH = '/home/ubuntu/RibbitEntry-BackEnd/resource'
     ALLOWED_EXTENSIONS = ('jpg', 'jpeg', 'bmp', 'gif', 'png')
