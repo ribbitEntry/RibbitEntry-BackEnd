@@ -27,9 +27,7 @@ POST_ELEMENT_GET = {
 
 POST_ELEMENT_DELETE = {
     'tags': ['posts'],
-    'parameters': [
-        jwt_param()
-    ],
+    'parameters': [jwt_param()],
     'responses': {
         '200': {'description': "글 삭제 성공"},
         '400': {'description': "없는 글입니다."}

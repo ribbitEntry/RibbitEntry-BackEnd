@@ -9,9 +9,5 @@ IMAGES_GET = {
         param('profile', '프로필', 'url', 'str', False),
         param('background', '배경 이미지', 'url', 'str', False)
     ],
-    'responses': {
-        '200': {
-            'description': "파일 반환 성공"
-        }
-    }
+    'responses': {'200': {'description': "파일 반환 성공"}}
 }

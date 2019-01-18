@@ -1,4 +1,4 @@
-from server.docs import jwt_param
+from server.docs import jwt_param, user_detail_example
 
 MAIN_PAGE_GET = {
     'tags': ['main-page'],
@@ -6,28 +6,12 @@ MAIN_PAGE_GET = {
     'responses': {
         '200': {
             'description': '메인 포스트가 없는 경우 유저 정보만 반환합니다.',
-            'example': {
-                'user_info': {
-                    "nickname": "ribbit",
-                    "profile_image": "link",
-                    "back_image": "link",
-                    "introduction": "entry",
-                    "follow_num": "0",
-                    "follower_num": "0"
-                }
-            }
+            'example': user_detail_example
         },
         '200': {
             'description': "메인포스트가 있는 경우 유저 정보와 메인 포스트 둘 다 반환합니다.",
             "example": {
-                'user_info': {
-                    "nickname": "ribbit",
-                    "profile_image": "link",
-                    "back_image": "link",
-                    "introduction": "entry",
-                    "follow_num": "0",
-                    "follower_num": "0"
-                },
+                'user_info': user_detail_example,
                 "post": {
                     "content": "리빗엔트리",
                     "image": "link",
@@ -39,8 +23,6 @@ MAIN_PAGE_GET = {
                 }
             }
         },
-        '401': {
-            'description': '없는 유저입니다.'
-        }
+        '401': {'description': '없는 유저입니다.'}
     }
 }
