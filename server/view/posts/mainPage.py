@@ -1,5 +1,6 @@
-from flask_restful import Resource
+from flask import abort
 from flasgger import swag_from
+from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from server.docs.mainpage import MAIN_PAGE_GET
@@ -15,10 +16,8 @@ class MainPage(Resource):
     def get(self):
         user_id = get_jwt_identity()
         user_info = User.query.filter(User.id == user_id).first()
-
         post_info = Post.query.filter(Follow.follow == user_id).filter(Post.user == Follow.follower).order_by().all()
-
-        user_info_ = {
+        user_detail_info = {
             "user_id" : user_info.id,
             "nickname": user_info.nickname,
             "profile_image": user_info.proimg,
@@ -29,14 +28,14 @@ class MainPage(Resource):
         }
 
         if not user_info:
-            return {"status": "없는 유저입니다."}, 401
+            return abort(401)
 
         elif user_info and not post_info:
-            return unicode_safe_json_dumps({"user_info": user_info_}, 200)
+            return unicode_safe_json_dumps({"user_info": user_detail_info}, 200)
 
         elif user_info and post_info:
             return unicode_safe_json_dumps({
-                       "user_info": user_info_,
+                       "user_info": user_detail_info,
                        "post": [
                            {
                                "id": posts.post_id,
