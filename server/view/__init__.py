@@ -34,10 +34,10 @@ class Router():
         from server.view.posts.posts import PostElement
         self.api.add_resource(PostElement, '/api/post/<postId>')
 
-        from server.view.posts.mainPage import MainPage
+        from server.view.page.mainPage import MainPage
         self.api.add_resource(MainPage, '/api/main')
 
-        from server.view.user.myPage import MyPagePatch
+        from server.view.page.myPage import MyPagePatch
         self.api.add_resource(MyPagePatch, '/api/<userId>/settings')
 
         from server.view.user.following import Follower
@@ -61,7 +61,7 @@ class Router():
         from server.view.posts.like import Like
         self.api.add_resource(Like, '/api/<postId>/like')
 
-        from server.view.user.userPage import UserPage
+        from server.view.page.userPage import UserPage
         self.api.add_resource(UserPage, '/api/<user>/profile')
 
 
