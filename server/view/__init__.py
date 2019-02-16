@@ -1,7 +1,7 @@
 import os
 import json
 
-from flask import Flask, Response, current_app, url_for
+from flask import Flask, Response, current_app
 from flask_restful import Api
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
@@ -16,16 +16,16 @@ class Router():
         self.api = Api(app)
 
     def register(self):
-        from server.view.user.login.login import Login
+        from server.view.auth.login import Login
         self.api.add_resource(Login, '/api/login')
 
-        from server.view.user.login.signUp import SignUp
+        from server.view.auth.signUp import SignUp
         self.api.add_resource(SignUp, '/api/signUp')
 
-        from server.view.web.web import Web
+        from server.view.web import Web
         self.api.add_resource(Web, '/api/status')
 
-        from server.view.search.search import Search
+        from server.view.posts.search import Search
         self.api.add_resource(Search, '/api/search')
 
         from server.view.posts.posts import Posts
@@ -34,26 +34,26 @@ class Router():
         from server.view.posts.posts import PostElement
         self.api.add_resource(PostElement, '/api/post/<postId>')
 
-        from server.view.mainPage.mainPage import MainPage
+        from server.view.page.mainPage import MainPage
         self.api.add_resource(MainPage, '/api/main')
 
-        from server.view.user.myPage.myPage import MyPagePatch
+        from server.view.page.myPage import MyPagePatch
         self.api.add_resource(MyPagePatch, '/api/<userId>/settings')
 
-        from server.view.follow.following import Follower
+        from server.view.user.following import Follower
         self.api.add_resource(Follower, '/api/<userId>/follower')
 
-        from server.view.follow.following import Following
+        from server.view.user.following import Following
         self.api.add_resource(Following, '/api/<userId>/following')
 
-        from server.view.images.images import GETImages
+        from server.view.posts.images import GETImages
         self.api.add_resource(GETImages, '/api/images')
 
-        from server.view.color.color import Color
+        from server.view.user.color import Color
         self.api.add_resource(Color, '/api/<userId>/color')
 
-        from server.view.mainPage.post_comment import PostCommentView
-        self.api.add_resource(PostCommentView, '/api/<postId>')
+        # from server.view.post_comment import PostCommentView
+        # self.api.add_resource(PostCommentView, '/api/<postId>')
 
         from server.view.posts.comment import PostComment
         self.api.add_resource(PostComment, '/api/<postId>/comment')
@@ -61,7 +61,7 @@ class Router():
         from server.view.posts.like import Like
         self.api.add_resource(Like, '/api/<postId>/like')
 
-        from server.view.userPage.userPage import UserPage
+        from server.view.page.userPage import UserPage
         self.api.add_resource(UserPage, '/api/<user>/profile')
 
 

@@ -1,5 +1,5 @@
 import unittest
-from server.view.mainPage.MainPage import MainPage
+from server.view.page.mainPage import MainPage
 
 
 class MainPageTest(unittest.TestCase):
