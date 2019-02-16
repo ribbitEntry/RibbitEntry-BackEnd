@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from server.model.user import User
 from server.model.post import Post
-from server.docs.posts.like import LIKE_PATCH
+from server.docs.posts import LIKE_PATCH
 from server.extensions import db
 
 

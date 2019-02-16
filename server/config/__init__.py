@@ -4,18 +4,18 @@ from datetime import timedelta
 
 
 class Config:
-    SERVICE_NAME = 'Ribbitentry-Backend',
-    SERVICE_NAME_UPPER = SERVICE_NAME.upper()
+    SERVICE_NAME = "Ribbitentry-Backend",
+    SERVICE_NAME_UPPER = "RIBBITENTRY-BACKEND"
 
     RUN_SETTING = {'threaded': True}
 
     SWAGGER = {
-        'title': SERVICE_NAME,
+        'title': "Ribbitentry-Backend",
         'specs_route': '/api/docs',
         'uiversion': 3,
 
         'info': {
-            'title': '{} API'.format(SERVICE_NAME),
+            'title': 'Ribbitentry-Backend API',
             'version': '0.1',
             'description': 'Ribbit 프로젝트의 백엔드 API 명세서입니다.'
         },

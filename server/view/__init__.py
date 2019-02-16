@@ -52,8 +52,8 @@ class Router():
         from server.view.user.color import Color
         self.api.add_resource(Color, '/api/<userId>/color')
 
-        from server.view.post_comment import PostCommentView
-        self.api.add_resource(PostCommentView, '/api/<postId>')
+        # from server.view.post_comment import PostCommentView
+        # self.api.add_resource(PostCommentView, '/api/<postId>')
 
         from server.view.posts.comment import PostComment
         self.api.add_resource(PostComment, '/api/<postId>/comment')
