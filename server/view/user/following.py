@@ -3,7 +3,7 @@ from flasgger import swag_from
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from server.docs.user import FOLLOWER_GET, FOLLOWING_GET, FOLLOWING_PATCH, FOLLOWING_DELETE
+from docs.user import FOLLOWER_GET, FOLLOWING_GET, FOLLOWING_PATCH, FOLLOWING_DELETE
 from server.model.user import User
 from server.model.follow import Follow
 from server.extensions import db

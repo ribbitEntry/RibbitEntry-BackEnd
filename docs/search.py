@@ -1,4 +1,4 @@
-from server.docs import param, user_example
+from docs import param, user_example
 
 SEARCH_GET = {
     'tags': ['search'],

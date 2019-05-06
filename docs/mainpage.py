@@ -1,4 +1,4 @@
-from server.docs import jwt_param, user_detail_example
+from docs import jwt_param, user_detail_example
 
 MAIN_PAGE_GET = {
     'tags': ['main-page'],

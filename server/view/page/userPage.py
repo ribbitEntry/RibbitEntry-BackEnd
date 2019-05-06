@@ -3,7 +3,7 @@ from flask_restful import Resource
 
 from server.model.user import User
 from server.model.post import Post
-from server.docs.user import USER_PAGE_GET
+from docs.user import USER_PAGE_GET
 from server.view import unicode_safe_json_dumps
 
 

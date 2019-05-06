@@ -1,4 +1,4 @@
-from server.docs import param, jwt_param
+from docs import param, jwt_param
 
 POSTS_POST = {
     'tags': ['posts'],

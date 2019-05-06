@@ -7,7 +7,7 @@ from flask_restful import Resource
 from server.model.user import User
 from server.view import upload_files
 from server.extensions import db
-from server.docs.user import MY_PAGE_POST
+from docs.user import MY_PAGE_POST
 
 
 # 마이페이지 정보 수정(닉네임, 프로필 이미지, 배경 이미지)

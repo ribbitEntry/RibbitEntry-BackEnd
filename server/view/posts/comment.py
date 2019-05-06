@@ -6,7 +6,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from server.extensions import db
 from server.model.comment import Comment
 from server.model.post import Post
-from server.docs.posts import COMMENT_POST
+from docs import COMMENT_POST
 from server.view import unicode_safe_json_dumps
 
 

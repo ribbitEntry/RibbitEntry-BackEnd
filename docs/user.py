@@ -1,4 +1,4 @@
-from server.docs import param, jwt_param, user_example
+from docs import param, jwt_param, user_example
 
 FOLLOWER_GET = {
     'tags': ['follow'],

@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flasgger import swag_from
 from flask import request
 
-from server.docs.search import SEARCH_GET
+from docs.search import SEARCH_GET
 from server.model.user import User
 from server.view import unicode_safe_json_dumps
 
